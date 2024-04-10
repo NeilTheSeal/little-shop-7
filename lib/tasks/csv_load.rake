@@ -2,6 +2,7 @@ require "csv"
 
 namespace :csv_load do
   task customers: [:environment] do
+    print "."
     file_path = "db/data/customers.csv"
     Customer.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
@@ -10,6 +11,7 @@ namespace :csv_load do
   end
 
   task merchants: [:environment] do
+    print "."
     file_path = "db/data/merchants.csv"
     Merchant.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
@@ -18,6 +20,7 @@ namespace :csv_load do
   end
 
   task invoices: [:environment] do
+    print "."
     file_path = "db/data/invoices.csv"
     Invoice.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
@@ -27,6 +30,7 @@ namespace :csv_load do
   end
 
   task items: [:environment] do
+    print "."
     file_path = "db/data/items.csv"
     Item.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
@@ -36,6 +40,7 @@ namespace :csv_load do
   end
 
   task invoice_items: [:environment] do
+    print "."
     file_path = "db/data/invoice_items.csv"
     InvoiceItem.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
@@ -45,6 +50,7 @@ namespace :csv_load do
   end
 
   task transactions: [:environment] do
+    print "."
     file_path = "db/data/transactions.csv"
     Transaction.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
@@ -54,11 +60,13 @@ namespace :csv_load do
   end
 
   task all: [:environment] do
+    print "Loading CSVs"
     Rake::Task["csv_load:customers"].invoke
     Rake::Task["csv_load:merchants"].invoke
     Rake::Task["csv_load:invoices"].invoke
     Rake::Task["csv_load:items"].invoke
     Rake::Task["csv_load:invoice_items"].invoke
     Rake::Task["csv_load:transactions"].invoke
+    puts "\nCSVs Loaded Successfully"
   end
 end
