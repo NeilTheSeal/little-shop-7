@@ -6,7 +6,7 @@ RSpec.describe 'merchant dashboard', type: :feature do
   end
 
   # User Story 1
-  it "merchant dashboard" do
+  it "merchant dashboard has the merchant's name" do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
 
@@ -15,7 +15,7 @@ RSpec.describe 'merchant dashboard', type: :feature do
   end
 
   # User Story 2
-  it "has links to merchant items and invoices" do
+  it "merchant dashboard has links to merchant items and invoices" do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
 
@@ -35,4 +35,29 @@ RSpec.describe 'merchant dashboard', type: :feature do
       expect(current_path).to eq(merchant_invoices_path(@merchant))
     end
   end
+
+  # User Story 3
+  it 'merchant dashboard shows top 5 customers, with number of successful transactions' do
+    # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
+    visit dashboard_merchant_path(@merchant)
+    save_and_open_page
+
+    # Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant
+    within '.merchant_top_5_customers' do
+      # And next to each customer name I see the number of successful transactions they have conducted with my merchant
+    end
+  end
+  
+  # User Story 4
+  it 'merchant dashboard has list of names of items that have been ordered but not shipped' do
+    # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
+    visit dashboard_merchant_path(@merchant)
+  end
+
+  # User Story 5
+  it 'merchant dashboard has invoices for ordered items with date, sorted from oldest to newest' do
+    # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
+    visit dashboard_merchant_path(@merchant)
+  end
+
 end
