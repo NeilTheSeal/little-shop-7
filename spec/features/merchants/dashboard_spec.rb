@@ -52,12 +52,28 @@ RSpec.describe 'merchant dashboard', type: :feature do
   it 'merchant dashboard has list of names of items that have been ordered but not shipped' do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
+
+    # Then I see a section for "Items Ready to Ship"
+    within ".merchant_items_to_be_shipped" do
+      expect(page).to have_content ("Items Ready to Ship")
+      # In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped,
+      # And next to each Item I see the id of the invoice that ordered my item
+      # And each invoice id is a link to my merchant's invoice show page
+    end
   end
 
   # User Story 5
   it 'merchant dashboard has invoices for ordered items with date, sorted from oldest to newest' do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
+
+    # In the section for "Items Ready to Ship",
+    within ".merchant_items_to_be_shipped" do
+      expect(page).to have_content ("Items Ready to Ship")
+      # Next to each Item name I see the date that the invoice was created
+      # And I see the date formatted like "Monday, July 18, 2019"
+      # And I see that the list is ordered from oldest to newest      
+    end
   end
 
 end
