@@ -5,29 +5,29 @@ RSpec.describe 'merchant dashboard', type: :feature do
     @merchant = create(:merchant)
   end
 
-  # 1. Merchant Dashboard
+  # User Story 1
   it "merchant dashboard" do
-    # As a merchant,
-    # When I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
-    # visit "/merchants/#{@merchant.id}/dashboard"
+    # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
-    # save_and_open_page
-    # Then I see the name of my merchant
+
+    # I see the name of my merchant
     expect(page).to have_content(@merchant.name)
   end
 
-  # 2. Merchant Dashboard Links
+  # User Story 2
   it "has links to merchant items and invoices" do
-    # As a merchant,
-    # When I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
+    # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
-    # Then I see link to my merchant items index (/merchants/:merchant_id/items)
+
+    # I see link to my merchant items index (/merchants/:merchant_id/items)
     within '.merchant_items' do
       expect(page).to have_link("Merchant Items")
       click_link("Merchant Items")
       expect(current_path).to eq(merchant_items_path(@merchant))
     end
+
     visit dashboard_merchant_path(@merchant)
+    
     # And I see a link to my merchant invoices index (/merchants/:merchant_id/invoices)
     within '.merchant_invoices' do
       expect(page).to have_link("Merchant Invoices")
