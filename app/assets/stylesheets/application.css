@@ -13,3 +13,88 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+.page-title {
+  font-size: 32px;
+  text-align: center;
+  padding: 15px;
+  background-color: lightgrey;
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.left-column {
+  display: grid;
+  font-size: 24px;
+  text-align: center;
+  align-items: center;
+}
+
+.right-column {
+  display: grid;
+  grid-template-columns: repeat(3, 90px);
+  justify-items: center;
+  justify-content: space-evenly;
+  align-content: center;
+  gap: 10px;
+}
+
+.nav-button {
+  background-color: rgb(234, 234, 234);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid black;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.nav-button.highlighted {
+  background-color: lightblue;
+}
+
+.nav-button:hover {
+  opacity: 0.7;
+}
+
+.page-content {
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+  justify-items: center;
+  border-bottom: 1px solid black;
+}
+
+.content-column {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  border-left: 1px solid black;
+  font-size: 18px;
+}
+
+.content-header {
+  font-size: 20px;
+  background-color: rgb(230, 230, 230);
+  border: 1px solid black;
+  border-top: none;
+  height: min-content;
+  width: calc(100% - 16px);
+  text-align: center;
+  padding: 8px;
+}
+
+.content-ordered-list {
+  line-height: 1.5rem;
+}

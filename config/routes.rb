@@ -10,5 +10,12 @@ Rails.application.routes.draw do
     resources :invoices, controller: "merchant_invoices", only: [:index]
   end
 
-  # get "/merchants/:id/dashboard", to: "merchants#dashboard"
+  scope module: 'admin' do
+    resources :admin, controller: "index", only: [:index]
+  end
+  
+  namespace :admin do
+    resources :merchants, controller: "merchants", only: [:index]
+    resources :invoices, controller: "invoices", only: [:index]
+  end
 end
