@@ -5,20 +5,30 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
-  #self.find_by_sql("SELECT * FROM merchants JOIN items ON merchants.id = items.merchant_id JOIN invoice_items ON items.id = invoice_items.item_id JOIN invoices ON invoices.id = invoice_items.invoice_id JOIN transactions ON transactions.invoice_id = invoices.id JOIN customers on customers.id = invoices.customer_id").where("")
-
-#   Merchant.find_by_sql("SELECT *FROM merchants JOIN items ON merchants.id = items.merchant
-# _id JOIN invoice_items ON items.id = invoice_items.item_id JOIN invoices ON invoices.id = invoice_items.i
-# nvoice_id JOIN transactions ON transactions.invoice_id = invoices.id JOIN customers on customers.id = inv
-# oices.customer_id").count
-
-# SELECT *
-# FROM merchants
-# JOIN items ON merchants.id = items.merchant_id
-# JOIN invoice_items ON items.id = invoice_items.item_id
-# JOIN invoices ON invoices.id = invoice_items.invoice_id
-# JOIN transactions ON transactions.invoice_id = invoices.id
-# JOIN customers on customers.id = invoices.customer_id
-# WHERE merchant_id = 1;
+  def top_5_customers
+    self.transactions
+      .joins(invoice: :customer)
+      .where("transactions.result = '1'")      
+      .select("customer.id, CONCAT(customers.first_name, '', customers.last_name) AS customer_name, COUNT(transactions.result) AS transaction_result")
+      .group("customers.id")
+      .order("transaction_result DESC")
+      .limit(5)
+  end
 
 end
+
+# SELECT merchants.id AS merchant_id, merchants.name AS merchants_name, customers.id AS customer_id, customers.first_name, customers.last_name, count(transactions.result) AS transaction_result
+
+# FROM customers
+# JOIN invoices ON invoices.customer_id = customers.id
+# JOIN transactions ON transactions.invoice_id = invoices.id
+# JOIN invoice_items ON invoice_items.invoice_id = invoices.id
+# JOIN items ON items.id = invoice_items.item_id
+# JOIN merchants ON merchants.id = items.merchant_id
+
+# WHERE transactions.result = '1' AND merchants.id = '1'
+
+# GROUP BY merchants.id, customers.id
+
+# ORDER BY merchants.id, transaction_result DESC
+# LIMIT 5;
