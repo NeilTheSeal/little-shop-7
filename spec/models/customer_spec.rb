@@ -2,32 +2,19 @@ require("rails_helper")
 
 RSpec.describe Customer do
   before(:each) do
-    @customer = create(:customer)
+    @customers = create_list(:customer, 5)
 
-    @merchant = create(:merchant)
+    @customer1_invoice_list = create_list(:invoice, 1, customer: @customers[0])
+    @customer2_invoice_list = create_list(:invoice, 3, customer: @customers[1])
+    @customer3_invoice_list = create_list(:invoice, 5, customer: @customers[2])
+    @customer4_invoice_list = create_list(:invoice, 4, customer: @customers[3])
+    @customer5_invoice_list = create_list(:invoice, 2, customer: @customers[4])
 
-    @invoice = create(:invoice, customer: @customer)
-    @invoice_list = create_list(:invoice, 5, customer: @customer)
-
-    @item = create(:item, merchant: @merchant)
-    @item_list = create_list(:item, 5, merchant: @merchant)
-
-    @invoice_item = create(
-      :invoice_item,
-      item: @item,
-      invoice: @invoice,
-      unit_price: @item.unit_price
-    )
-
-    @invoice_items_list = create_list(
-      :invoice_item,
-      5,
-      item: @item_list[0],
-      invoice: @invoice_list[0],
-      unit_price: @item_list[0].unit_price
-    )
-
-    @transaction = create(:transaction, invoice: @invoice_list[0])
+    @customer1_invoice_list.each { |invoice| create(:transaction, invoice:) }
+    @customer2_invoice_list.each { |invoice| create(:transaction, invoice:) }
+    @customer3_invoice_list.each { |invoice| create(:transaction, invoice:) }
+    @customer4_invoice_list.each { |invoice| create(:transaction, invoice:) }
+    @customer5_invoice_list.each { |invoice| create(:transaction, invoice:) }
   end
 
   describe "associations" do
@@ -35,17 +22,13 @@ RSpec.describe Customer do
     it { should have_many(:invoice_items).through(:invoices) }
   end
 
+  it "should list the top 5 customers in descending order" do
+    expect(Customer.top_customers).to eq([
+      @customers[2],
+      @customers[3],
+      @customers[1],
+      @customers[4],
+      @customers[0]
+    ])
+  end
 end
-
-
-
-# it "examples" do
-  # p @customer
-  # p @merchant
-  # p @invoice
-  # p @invoice_list[0]
-  # p @item
-  # p @item_list[0]
-  # p @invoice_item
-  # p @invoice_items_list[0]
-  # p @transaction
