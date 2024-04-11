@@ -34,6 +34,6 @@ FactoryBot.define do
     credit_card_expiration_date do
       Faker::Business.credit_card_expiry_date.strftime("%m/%y")
     end
-    result { 1 }
+    result { "success" }
   end
 end

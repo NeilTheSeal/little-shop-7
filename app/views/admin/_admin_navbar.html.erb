@@ -1,0 +1,24 @@
+<div class="page-title">Little Etsy Shop</div>
+<div class="navbar">
+  <div class="left-column">
+    <div class="admin-dashboard-label">Admin Dashboard</div>
+  </div>
+  <div class="right-column">
+    <a href="/admin" class="nav-button" id="dashboard-button">dashboard</a>
+    <a href="/admin/merchants" class="nav-button" id="merchants-button">merchants</a>
+    <a href="/admin/invoices" class="nav-button" id="invoices-button">invoices</a>
+  </div>
+</div>
+<script>
+  if (window.location.pathname == "/admin") {
+    document.getElementById("dashboard-button").classList.add("highlighted")
+  }
+
+  if (window.location.pathname.includes("merchants")) {
+    document.getElementById("merchants-button").classList.add("highlighted")
+  }
+
+  if (window.location.pathname.includes("invoices")) {
+    document.getElementById("invoices-button").classList.add("highlighted")
+  }
+</script>
