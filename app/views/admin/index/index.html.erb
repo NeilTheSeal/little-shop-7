@@ -1,1 +1,20 @@
 <%= render partial: "admin/admin_navbar" %>
+
+<div class="page-content">
+  
+  <div class="content-column">
+    <div class="content-header">Incomplete Invoices</div>
+  </div>
+
+  <div class="content-column">
+    <div class="content-header">Top Customers</div>
+    <ol class="content-ordered-list">
+      <% @top_customers.each do |customer| %>
+        <li class="ordered-list-item">
+          <%= customer.first_name %> <%= customer.last_name %> – <%= customer.transaction_count %> purchases
+        </li>
+      <% end %>
+    </ol>
+  </div>
+
+</div>
