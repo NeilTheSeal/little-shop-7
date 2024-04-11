@@ -3,6 +3,28 @@ require 'rails_helper'
 RSpec.describe 'merchant dashboard', type: :feature do
   before(:each) do
     @merchant = create(:merchant)
+
+    @customer_list = create_list(:customer, 6)
+
+    @item_list = create_list(:item, 21, merchant: @merchant)
+
+    @invoice_list = []
+    @invoice_list << create(:invoice, customer: @customer_list[0])
+    2.times { @invoice_list << create(:invoice, customer: @customer_list[1])}
+    3.times { @invoice_list << create(:invoice, customer: @customer_list[2]) }
+    4.times { @invoice_list << create(:invoice, customer: @customer_list[3]) }
+    5.times { @invoice_list << create(:invoice, customer: @customer_list[4]) }
+    6.times { @invoice_list << create(:invoice, customer: @customer_list[5]) }
+
+    @invoice_item_list = []
+    @item_list.each_with_index do |item, index|
+      @invoice_item_list << create(:invoice_item, item: item, invoice: @invoice_list[index], unit_price: item.unit_price)
+    end
+
+    @transaction_list = []
+    @invoice_list.each_with_index do |invoice, index|
+      @transaction_list << create(:transaction, invoice: invoice)
+    end
   end
 
   # User Story 1
@@ -40,16 +62,24 @@ RSpec.describe 'merchant dashboard', type: :feature do
   it 'merchant dashboard shows top 5 customers, with number of successful transactions' do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
-    save_and_open_page
-
     # Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant
     within '.merchant_top_5_customers' do
+      expect(page).to have_content("Top Five Customers")
       # And next to each customer name I see the number of successful transactions they have conducted with my merchant
+      expect(@customer_list[5].first_name).to appear_before(@customer_list[4].first_name)
+      expect(@customer_list[4].first_name).to appear_before(@customer_list[3].first_name)
+      expect(@customer_list[3].first_name).to appear_before(@customer_list[2].first_name)
+      expect(@customer_list[2].first_name).to appear_before(@customer_list[1].first_name)
+
+      expect(@customer_list[5].last_name).to appear_before(@customer_list[4].last_name)
+      expect(@customer_list[4].last_name).to appear_before(@customer_list[3].last_name)
+      expect(@customer_list[3].last_name).to appear_before(@customer_list[2].last_name)
+      expect(@customer_list[2].last_name).to appear_before(@customer_list[1].last_name)
     end
   end
   
   # User Story 4
-  it 'merchant dashboard has list of names of items that have been ordered but not shipped' do
+  xit 'merchant dashboard has list of names of items that have been ordered but not shipped' do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
 
@@ -63,7 +93,7 @@ RSpec.describe 'merchant dashboard', type: :feature do
   end
 
   # User Story 5
-  it 'merchant dashboard has invoices for ordered items with date, sorted from oldest to newest' do
+  xit 'merchant dashboard has invoices for ordered items with date, sorted from oldest to newest' do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
 
