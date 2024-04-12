@@ -4,6 +4,16 @@
   
   <div class="content-column">
     <div class="content-header">Incomplete Invoices</div>
+    <ol class="content-ordered-list">
+      <% @unshipped_invoices.each do |invoice| %>
+        <li class="ordered-list-item">
+          <%= link_to "Invoice ##{invoice.id}", "/admin/invoices/#{invoice.id}" %>
+          <div class="date"> 
+            <%= invoice.created_at.strftime("%A, %B %d, %Y") %>
+          </div>
+        </li>
+      <% end %>
+    </ol>
   </div>
 
   <div class="content-column">
