@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "welcome#index"
 
@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   scope module: 'admin' do
     resources :admin, controller: "index", only: [:index]
   end
-  
+
   namespace :admin do
     resources :merchants, controller: "merchants", only: [:index]
-    resources :invoices, controller: "invoices", only: [:index]
+    resources :invoices, controller: "invoices", only: [:index, :show]
   end
 end
