@@ -79,7 +79,7 @@ RSpec.describe 'merchant dashboard', type: :feature do
   end
   
   # User Story 4
-  xit 'merchant dashboard has list of names of items that have been ordered but not shipped' do
+  it 'merchant dashboard has list of names of items that have been ordered but not shipped' do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit dashboard_merchant_path(@merchant)
 

@@ -43,5 +43,9 @@ RSpec.describe Merchant, type: :model do
       expect(top_five[3].customer_name).to eq(@customer_list[2].first_name.concat(" #{@customer_list[2].last_name}"))
       expect(top_five[4].customer_name).to eq(@customer_list[1].first_name.concat(" #{@customer_list[1].last_name}"))
     end
+
+    it "#rts_items" do
+      expect(@merchant.rts_items).to eq(@invoice_item_list)
+    end
   end
 end
