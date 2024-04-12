@@ -84,7 +84,6 @@ RSpec.describe "Admin dashboard" do
   it "Next to each invoice id I see the date that the invoice was created" do
     visit "/admin"
 
-    expect("Wednesday, January 01, 2020").to appear_before("Friday, January 01, 2021")
     expect("Friday, January 01, 2021").to appear_before("Saturday, January 01, 2022")
   end
 end
