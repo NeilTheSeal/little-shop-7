@@ -1,14 +1,19 @@
 # Little Esty Shop
 
-## Description of Project
+### Description of Project
 
-## Summary of Work Completed
+### Summary of Work Completed
 
-## Ideas for a Contributor to Work on / Refactor
+### Ideas for a Contributor to Work on / Refactor
 
-## Project Contributors
+### Project Contributors
 
-   - README should include a basic description of the project, a summary of the work completed, and some ideas for a potential contributor to work on/refactor next. Also include the names and GitHub links of all student contributors on your project. 
+Neil Hendren
+Aurora Sanderson
+Luis Aparicio
+Grant Davis
+
+README should include a basic description of the project, a summary of the work completed, and some ideas for a potential contributor to work on/refactor next. Also include the names and GitHub links of all student contributors on your project. 
 
 # Additional Project Information
 
