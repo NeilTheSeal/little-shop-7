@@ -7,7 +7,7 @@
     <ol class="content-ordered-list">
       <% @merchants.each do |merchant| %>
         <li class="ordered-list-item">
-          <%= merchant.name %>
+          <%= link_to merchant.name, admin_site_merchant_path(merchant) %>
         </li>
       <% end %>
     </ol>
