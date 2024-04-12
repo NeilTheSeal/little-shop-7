@@ -14,7 +14,20 @@ class Merchant < ApplicationRecord
       .limit(5)
   end
 
+  def rts_items #ready_to_ship
+    self.invoice_items.joins(:invoice).where("invoice_items.status != '2'").order("invoices.created_at desc") #items.joins(:invoices)
+  end
+
 end
+
+# SELECT items.name AS item_to_be_shipped, invoices.id AS invoice_id
+
+# FROM items
+# JOIN merchants ON merchants.id = items.merchant_id
+# JOIN invoice_items ON invoice_items.item_id = items.id
+# JOIN invoices ON invoices.id = invoice_items.invoice_id
+
+# WHERE merchants.id = '1' AND invoice_items.status = '1';
 
 # SELECT merchants.id AS merchant_id, merchants.name AS merchants_name, customers.id AS customer_id, customers.first_name, customers.last_name, count(transactions.result) AS transaction_result
 

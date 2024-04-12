@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :merchants do
     member { get "dashboard"}
     resources :items, controller: "merchant_items", only: [:index]
-    resources :invoices, controller: "merchant_invoices", only: [:index]
+    resources :invoices, controller: "merchant_invoices", only: [:index, :show]
   end
 
   scope module: 'admin' do
