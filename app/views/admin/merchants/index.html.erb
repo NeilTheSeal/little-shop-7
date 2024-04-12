@@ -1,1 +1,21 @@
 <%= render partial: "admin/admin_navbar" %>
+
+<div class="page-content">
+  
+  <div class="content-column">
+    <div class="content-header">List of Merchants</div>
+    <ol class="content-ordered-list">
+      <% @merchants.each do |merchant| %>
+        <li class="ordered-list-item">
+          <%= merchant.name %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div class="content-column">
+    <div class="content-header">We Dunno Yet</div>
+
+  </div>
+
+</div>
