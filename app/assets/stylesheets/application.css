@@ -82,6 +82,7 @@ body {
   width: 100%;
   border-left: 1px solid black;
   font-size: 18px;
+  align-content: start;
 }
 
 .content-header {

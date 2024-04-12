@@ -17,7 +17,7 @@
 
 <section class="merchant_items_to_be_shipped">
   <h3> Items Ready to Ship </h3>
-    <% @merchant.rts_items.each do |invoice_item| %>
+    <% @merchant.ready_to_ship_items.each do |invoice_item| %>
       <h3> <%= invoice_item.item.name %> | 
       <%= link_to "Invoice #{invoice_item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.id}", method: :get %> |
       <%= invoice_item.invoice.created_at.strftime("%A, %B %e, %Y - %H:%M:%S") %>

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Merchant, type: :model do
   # describe 'validations' do
@@ -18,7 +18,7 @@ RSpec.describe Merchant, type: :model do
 
     @invoice_list = []
     @invoice_list << create(:invoice, customer: @customer_list[0])
-    2.times { @invoice_list << create(:invoice, customer: @customer_list[1])}
+    2.times { @invoice_list << create(:invoice, customer: @customer_list[1]) }
     3.times { @invoice_list << create(:invoice, customer: @customer_list[2]) }
     4.times { @invoice_list << create(:invoice, customer: @customer_list[3]) }
     5.times { @invoice_list << create(:invoice, customer: @customer_list[4]) }
@@ -26,17 +26,17 @@ RSpec.describe Merchant, type: :model do
 
     @invoice_item_list = []
     @item_list.each_with_index do |item, index|
-      @invoice_item_list << create(:invoice_item, item: item, invoice: @invoice_list[index], unit_price: item.unit_price)
+      @invoice_item_list << create(:invoice_item, item:,
+                                                  invoice: @invoice_list[index], unit_price: item.unit_price)
     end
     @transaction_list = []
     @invoice_list.each_with_index do |invoice, index|
-      @transaction_list << create(:transaction, invoice: invoice)
+      @transaction_list << create(:transaction, invoice:)
     end
-
   end
-  describe 'instance methods' do
+  describe "instance methods" do
     it "list the top 5 customers for each merchant" do
-      top_five = @merchant.top_five_customers 
+      top_five = @merchant.top_five_customers
       expect(top_five[0].customer_name).to eq(@customer_list[5].first_name.concat(" #{@customer_list[5].last_name}"))
       expect(top_five[1].customer_name).to eq(@customer_list[4].first_name.concat(" #{@customer_list[4].last_name}"))
       expect(top_five[2].customer_name).to eq(@customer_list[3].first_name.concat(" #{@customer_list[3].last_name}"))
@@ -44,8 +44,8 @@ RSpec.describe Merchant, type: :model do
       expect(top_five[4].customer_name).to eq(@customer_list[1].first_name.concat(" #{@customer_list[1].last_name}"))
     end
 
-    it "#rts_items" do
-      expect(@merchant.rts_items).to eq(@invoice_item_list)
+    it "#ready_to_ship_items" do
+      expect(@merchant.ready_to_ship_items).to eq(@invoice_item_list)
     end
   end
 end
