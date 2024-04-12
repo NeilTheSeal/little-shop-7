@@ -7,8 +7,16 @@ Rails.application.routes.draw do
     controller: "merchant_site/merchant",
     only: %i[index show]
   ) do
-    resources :items, controller: "merchant_site/items", only: [:index]
-    resources :invoices, controller: "merchant_site/invoices", only: [:index]
+    resources(
+      :items,
+      controller: "merchant_site/items",
+      only: [:index]
+    )
+    resources(
+      :invoices,
+      controller: "merchant_site/invoices",
+      only: [:index]
+    )
   end
 
   resources(
@@ -18,7 +26,16 @@ Rails.application.routes.draw do
   )
 
   namespace :admin_site, path: "/admin" do
-    resources :merchants, controller: "merchants", only: [:index, :show, :edit, :update]
-    resources :invoices, controller: "invoices", only: %i[index show]
+    resources(
+      :merchants,
+      controller: "merchants",
+      only: %i[index show edit update]
+    )
+
+    resources(
+      :invoices,
+      controller: "invoices",
+      only: %i[index show]
+    )
   end
 end
