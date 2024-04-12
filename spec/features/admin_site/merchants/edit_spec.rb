@@ -8,6 +8,7 @@ RSpec.describe "Merchant edit page" do
   it "has a form to edit merchant info" do
     visit "/admin/merchants/#{@merchant.id}/edit"
 
+    expect(page).to have_content("Edit information for #{@merchant.name}")
     expect(page).to have_css("form")
     expect(page).to have_field("name")
     expect(find('input[name="name"]').value).to eq(@merchant.name)
