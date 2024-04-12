@@ -1,10 +1,9 @@
-module Admin
+module MerchantSite
   class InvoicesController < ApplicationController
-    def index; end
-
-    def show
-      @invoice = Invoice.find(params[:id])
+    def index
     end
 
+    def show
+    end
   end
 end

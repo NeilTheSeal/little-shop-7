@@ -1,4 +1,4 @@
-module Admin
+module AdminSite
   class MerchantsController < ApplicationController
     def index
       @merchants = Merchant.all
