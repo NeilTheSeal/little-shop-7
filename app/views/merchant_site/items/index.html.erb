@@ -1,1 +1,7 @@
-<h1> Merchant Item Index </h1>
+<h1> Merchant <%= @merchant.name %></h1>
+
+<section class="name_of_items">
+  <% @merchant.all_items.each do |item| %>
+    <h3><%= item.name %></h3>
+  <% end %>
+</section>

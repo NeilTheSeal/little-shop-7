@@ -20,7 +20,7 @@
     <% @merchant.ready_to_ship_items.each do |invoice_item| %>
       <h3> <%= invoice_item.item.name %> | 
       <%= link_to "Invoice #{invoice_item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.id}", method: :get %> |
-      <%= invoice_item.invoice.created_at.strftime("%A, %B %e, %Y - %H:%M:%S") %>
+      <%= invoice_item.invoice.created_at.strftime("%A, %B %d, %Y") %>
       </h3>
     <% end %>
 </section>
