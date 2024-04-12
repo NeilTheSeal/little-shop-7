@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   )
 
   namespace :admin_site, path: "/admin" do
-    resources :merchants, controller: "merchants", only: [:index, :show]
+    resources :merchants, controller: "merchants", only: [:index, :show, :edit, :update]
     resources :invoices, controller: "invoices", only: %i[index show]
   end
 end

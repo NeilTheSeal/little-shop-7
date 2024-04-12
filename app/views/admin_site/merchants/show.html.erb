@@ -1,2 +1,16 @@
 <%= render partial: "admin_site/admin_navbar" %>
 
+<div class="full-width-content">
+
+  <% flash.each do |type, msg| %>
+    <div class="flash-msg">
+      <%= msg %>
+    </div>
+  <% end %>
+
+  <div class="full-width-header">Merchant Info</div>
+  <div class="info-box">
+    <div class="info-box-header"><%= @merchant.name %></div>
+    <%= link_to "update", edit_admin_site_merchant_path(@merchant), class: "update-button" %>
+  </div>
+</div>
