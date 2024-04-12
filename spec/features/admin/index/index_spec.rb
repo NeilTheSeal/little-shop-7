@@ -10,9 +10,9 @@ RSpec.describe "Admin dashboard" do
     @item_list3 = create_list(:item, 3, merchant: @merchant, unit_price: 1000)
 
 
-    @customer1_invoice_list = create_list(:invoice, 1, customer: @customers[0])
-    @customer2_invoice_list = create_list(:invoice, 3, customer: @customers[1])
-    @customer3_invoice_list = create_list(:invoice, 5, customer: @customers[2])
+    @customer1_invoice_list = create_list(:invoice, 1, customer: @customers[0], created_at: "2020-01-01 00:00:00")
+    @customer2_invoice_list = create_list(:invoice, 3, customer: @customers[1], created_at: "2022-01-01 00:00:00")
+    @customer3_invoice_list = create_list(:invoice, 5, customer: @customers[2], created_at: "2021-01-01 00:00:00")
     @customer4_invoice_list = create_list(:invoice, 4, customer: @customers[3])
     @customer5_invoice_list = create_list(:invoice, 2, customer: @customers[4])
 
@@ -79,5 +79,12 @@ RSpec.describe "Admin dashboard" do
 
     click_link("Invoice ##{@customer2_invoice_list[0].id}")
     expect(page).to have_current_path("/admin/invoices/#{@customer2_invoice_list[0].id}")
+  end
+
+  it "Next to each invoice id I see the date that the invoice was created" do
+    visit "/admin"
+
+    expect("Wednesday, January 01, 2020").to appear_before("Friday, January 01, 2021")
+    expect("Friday, January 01, 2021").to appear_before("Saturday, January 01, 2022")
   end
 end
