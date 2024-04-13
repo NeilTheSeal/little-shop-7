@@ -1,0 +1,22 @@
+<h1> Edit <%= @item.name %> </h1>
+
+<%= form_with url: merchant_item_path(@merchant, @item), method: :patch, data: {turbo: false} do |form| %>
+
+    <%= form.label :name, "Item Name:" %> <br>
+    <%= form.text_field :name, value: "#{@item.name}" %> <br>
+
+    <br>
+
+    <%= form.label :description, "Item Description:" %> <br>
+    <%= form.text_field :description, value: "#{@item.description}" %> <br>
+
+    <br>
+
+    <%= form.label :unit_price, "Item Selling Price (in cents):" %> <br>
+    <%= form.text_field :unit_price, value: "#{@item.unit_price}" %> <br>
+
+    <br>
+
+    <%= form.submit "Update Item" %>  
+
+<% end %>
