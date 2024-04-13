@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
+  enum :status, %w[enabled disabled]
+
   def top_five_customers
     transactions.joins(invoice: :customer)
                 .where("transactions.result = '1'")
