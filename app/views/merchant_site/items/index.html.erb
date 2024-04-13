@@ -2,13 +2,13 @@
 
 <section class="name_of_items">
   <ul>
-    <% @merchant.all_items.each do |item| %>
+    <% @merchant.items.order(:id).each do |item| %>
       <div id="item_block_<%= item.id %>">
         <li>
           <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %> </p>
           <p><%= item.status %></p>
-          <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {status: "Enable"} %> 
-          <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {status: "Disable"} %>
+          <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {status: "enabled"} %> 
+          <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {status: "disabled"} %>
         </li>       
       </div>
     <% end %>

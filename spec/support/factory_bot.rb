@@ -12,6 +12,7 @@ FactoryBot.define do
 
   factory :merchant, class: Merchant do
     name { Faker::Cannabis.brand }
+    status { 0 }
   end
 
   factory :invoice, class: Invoice do

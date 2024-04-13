@@ -3,10 +3,23 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   resources(
-    :merchant, controller: "merchant_site/dashboard", only: %i[index show]
+    :merchant, controller: "merchant_site/merchant", only: %i[index]
   ) do
-    resources :items, controller: "merchant_site/items", only: [:index, :show, :edit, :update]
-    resources :invoices, controller: "merchant_site/invoices", only: [:index]
+    resources(
+      :dashboard,
+      controller: "merchant_site/dashboard",
+      only: %i[index]
+    )
+    resources(
+      :items,
+      controller: "merchant_site/items",
+      only: %i[index show edit update]
+    )
+    resources(
+      :invoices,
+      controller: "merchant_site/invoices",
+      only: %i[index show]
+    )
   end
 
   resources(
@@ -16,7 +29,16 @@ Rails.application.routes.draw do
   )
 
   namespace :admin_site, path: "/admin" do
-    resources :merchants, controller: "merchants", only: [:index]
-    resources :invoices, controller: "invoices", only: %i[index show]
+    resources(
+      :merchants,
+      controller: "merchants",
+      only: %i[index show edit update]
+    )
+
+    resources(
+      :invoices,
+      controller: "invoices",
+      only: %i[index show]
+    )
   end
 end

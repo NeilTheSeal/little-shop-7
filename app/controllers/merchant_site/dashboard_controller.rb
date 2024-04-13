@@ -1,11 +1,7 @@
 module MerchantSite
   class DashboardController < ApplicationController
     def index
-      @all_merchants = Merchant.all
-    end
-
-    def show
-      @merchant = Merchant.find(params[:id])
+      @merchant = Merchant.find(params[:merchant_id])
     end
   end
 end

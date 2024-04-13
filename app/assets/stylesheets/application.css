@@ -99,3 +99,36 @@ body {
 .content-ordered-list {
   line-height: 1.5rem;
 }
+
+.content-ordered-list.with-button {
+  font-size: 15px;
+  line-height: 2.25rem;
+}
+
+.content-ordered-list.with-button > li > form {
+  display: inline;
+}
+
+.content-ordered-list.with-button > li > form > input[type="submit"] {
+  background-color: rgb(245, 205, 155);
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 3px 7px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.content-ordered-list.with-button > li > form > input[type="submit"]:hover {
+  opacity: 0.7;
+}
+
+#flash_message {
+  position: absolute;
+  left: 50vw;
+  top: 10px;
+  transform: translateX(-50%);
+  background-color: red;
+  color: white;
+  padding: 20px;
+  width: max-content;
+}

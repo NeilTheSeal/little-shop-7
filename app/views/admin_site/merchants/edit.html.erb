@@ -1,0 +1,11 @@
+<%= render partial: "admin_site/admin_navbar" %>
+
+<div class="full-width-content">
+  <div class="full-width-header">Edit information for <%= @merchant.name %></div>
+  <%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, class: "edit-merchant-form" do |form| %>
+    <%= form.label :name, "Merchant Name: " %>
+    <%= form.text_field :name, value: @merchant.name %>
+    <%= form.hidden_field :status, value: @merchant.status %>
+    <%= form.submit "update" %>
+  <% end %>
+</div>

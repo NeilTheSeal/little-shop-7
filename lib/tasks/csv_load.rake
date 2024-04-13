@@ -15,6 +15,7 @@ namespace :csv_load do
     file_path = "db/data/merchants.csv"
     Merchant.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
+      row[:status] = 0
       Merchant.create!(row.to_hash)
     end
   end

@@ -1,7 +1,30 @@
-<h1> All Merchants </h1>
+<h1> Merchant: <%= @merchant.name %> </h1>
 
-<ul>
-<%= @all_merchants.each do |merchant| %>
-  <li> <p> <%= link_to "#{merchant.name}", merchant_path(merchant) %> </p> </li>
-<% end %>
-</ul>
+<section class="merchant_items">
+  <%= link_to "Merchant Items", merchant_items_path(@merchant), method: :get %>
+</section>
+
+<br>
+
+<section class="merchant_invoices">
+  <%= link_to "Merchant Invoices", merchant_invoices_path(@merchant), method: :get %>
+</section>
+
+<section class="merchant_top_5_customers">
+  <h3> Top Five Customers </h3>
+  <ul>
+    <% @merchant.top_five_customers.each do |customer| %>
+      <li><p><b> <%= customer.customer_name %> </b> | Successful Transactions w/ Merchant: <%= customer.transaction_result %> </p> </li>
+    <% end %>
+  </ul>
+</section>
+
+<section class="merchant_items_to_be_shipped">
+  <h3> Items Ready to Ship </h3>
+  <ul>
+    <% @merchant.ready_to_ship_items.each do |invoice_item| %>
+      <li><p><b> <%= invoice_item.item.name %> </b> | <%= link_to "Invoice #{invoice_item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.id}", method: :get %> | 
+      <br> Invoice Created: <%= invoice_item.formatted_invoice_date %> </p> </li>
+    <% end %>
+  </ul>
+</section>
