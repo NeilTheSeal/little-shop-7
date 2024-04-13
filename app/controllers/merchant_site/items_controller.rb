@@ -18,14 +18,19 @@ module MerchantSite
       @merchant = Merchant.find(params[:merchant_id])
       @item = Item.find(params[:id])
       @item.update(item_params)
-      flash[:notice] = "Item Updated"
-      redirect_to merchant_item_path(@merchant, @item)
+      # require 'pry' ; binding.pry
+      if params[:status]
+        redirect_to merchant_items_path(@merchant)
+      else
+        flash[:notice] = "Item Updated"
+        redirect_to merchant_item_path(@merchant, @item)
+      end
     end
 
     private
     # Strong Params
     def item_params
-      params.permit(:name, :description, :unit_price)
+      params.permit(:name, :description, :unit_price, :status)
     end
   end
 end

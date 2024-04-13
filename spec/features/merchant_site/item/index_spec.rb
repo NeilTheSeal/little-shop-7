@@ -61,10 +61,21 @@ RSpec.describe 'Merchant_items#index', type: :feature do
     # Next to each item name I see a button to disable or enable that item.
     within "#item_block_#{@item_list[0].id}" do
       expect(page).to have_button("Enable")
-      expect(page).to have_button("Disable")
+      # When I click this button
+      click_button("Enable")
+      # Then I am redirected back to the items index
+      expect(current_path).to eq(merchant_items_path(@merchant))
+      # And I see that the items status has changed
+      expect(page).to have_content("Enable")
     end
-    # When I click this button
-    # Then I am redirected back to the items index
-    # And I see that the items status has changed
+    within "#item_block_#{@item_list[0].id}" do
+      expect(page).to have_button("Disable")
+      # When I click this button
+      click_button("Disable")
+      # Then I am redirected back to the items index
+      expect(current_path).to eq(merchant_items_path(@merchant))
+      # And I see that the items status has changed
+      expect(page).to have_content("Disable")
+    end
   end
 end

@@ -6,8 +6,9 @@
       <div id="item_block_<%= item.id %>">
         <li>
           <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %> </p>
-          <%= button_to "Enable", merchant_items_path(@merchant) %> 
-          <%= button_to "Disable", merchant_items_path(@merchant) %>
+          <p><%= item.status %></p>
+          <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {status: "Enable"} %> 
+          <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {status: "Disable"} %>
         </li>       
       </div>
     <% end %>
