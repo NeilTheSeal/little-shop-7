@@ -39,8 +39,7 @@ RSpec.describe 'Merchant_items#show', type: :feature do
 
   # User Story 7
   it 'merchant item show page lists name, description, and selling price' do
-    # As a merchant,
-    # When I click on the name of an item from the merchant items index page, (merchants/:merchant_id/items)
+    # As a merchant, when I click on the name of an item from the merchant items index page, (merchants/:merchant_id/items)
     visit merchant_items_path(@merchant)
     click_link "#{@item_list[0].name}"
     save_and_open_page
