@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   resources(
-    :merchant,
-    controller: "merchant_site/dashboard",
-    only: %i[index show]
+    :merchant, controller: "merchant_site/dashboard", only: %i[index show]
   ) do
     resources :items, controller: "merchant_site/items", only: [:index, :show]
     resources :invoices, controller: "merchant_site/invoices", only: [:index]
