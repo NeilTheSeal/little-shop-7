@@ -23,6 +23,7 @@ FactoryBot.define do
     name { Faker::Food.dish }
     description { Faker::Hipster.paragraph(sentence_count: 2) }
     unit_price { rand(500..10_000) }
+    status { 0 }
   end
 
   factory :invoice_item, class: InvoiceItem do

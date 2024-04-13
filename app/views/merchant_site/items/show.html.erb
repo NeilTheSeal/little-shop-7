@@ -1,0 +1,8 @@
+<section class="item_attributes">
+  <h1> <%= @item.name %> </h1>
+  <p><b> Description: </b> <%= @item.description %> </p>
+  <p><b> Current Selling Price: </b> <%= @item.formatted_unit_price %> </p>
+
+  <%= link_to "Update Item", edit_merchant_item_path(@item.merchant, @item), 
+    data: {turbo_method: :get} %>
+</section>
