@@ -76,5 +76,4 @@ RSpec.describe 'Merchant_items#show', type: :feature do
     expect(current_path).to eq(merchant_item_path(@merchant, @item_list[0]))
     # And I see a flash message stating that the information has been successfully updated.
   end
-
 end

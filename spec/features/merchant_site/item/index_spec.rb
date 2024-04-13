@@ -52,4 +52,19 @@ RSpec.describe 'Merchant_items#index', type: :feature do
   # And I do not see items for any other merchant
   expect(page).to_not have_content(@item_list2[0].name) # We might need to fix - random data everytime, hard to eliminate certain items
   end
+
+  # User Story 9
+  it 'update item button' do
+    # As a merchant, when I visit my items index page (/merchants/:merchant_id/items)
+    visit merchant_items_path(@merchant, @item_list[0])
+    save_and_open_page
+    # Next to each item name I see a button to disable or enable that item.
+    within "#item_block_#{@item_list[0].id}" do
+      expect(page).to have_button("Enable")
+      expect(page).to have_button("Disable")
+    end
+    # When I click this button
+    # Then I am redirected back to the items index
+    # And I see that the items status has changed
+  end
 end
