@@ -1,8 +1,10 @@
-<h1>Merchant: <%= @merchant.name %></h1>
+<h1> Merchant: <%= @merchant.name %> </h1>
 
 <section class="merchant_items">
   <%= link_to "Merchant Items", merchant_items_path(@merchant), method: :get %>
 </section>
+
+<br>
 
 <section class="merchant_invoices">
   <%= link_to "Merchant Invoices", merchant_invoices_path(@merchant), method: :get %>

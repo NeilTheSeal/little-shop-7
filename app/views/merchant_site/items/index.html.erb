@@ -1,7 +1,9 @@
-<h1> Merchant <%= @merchant.name %></h1>
+<h1> Merchant: <%= @merchant.name %> Items </h1>
 
 <section class="name_of_items">
+<ul>
   <% @merchant.all_items.each do |item| %>
-    <h3> <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %> </h3>
+    <li><p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %> </p></li>
   <% end %>
+</ul>
 </section>
