@@ -48,6 +48,7 @@ RSpec.describe "merchant dashboard", type: :feature do
   it "merchant dashboard has links to merchant items and invoices" do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
     visit merchant_path(@merchant)
+    save_and_open_page
 
     # I see link to my merchant items index (/merchants/:merchant_id/items)
     within ".merchant_items" do
