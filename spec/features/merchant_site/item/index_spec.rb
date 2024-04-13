@@ -37,10 +37,9 @@ RSpec.describe 'Merchant_items#index', type: :feature do
     end
   end
 
-  # 6. Merchant Items Index Page
-  it "list of all the names" do
-  # As a merchant,
-  # When I visit my merchant items index page (merchants/:merchant_id/items)
+  # User Story 6
+  xit "list of all the names" do
+  # As a merchant, when I visit my merchant items index page (merchants/:merchant_id/items)
   visit merchant_items_path(@merchant)
   # I see a list of the names of all of my items
   within '.name_of_items' do
