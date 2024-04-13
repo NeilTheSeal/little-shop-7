@@ -11,14 +11,13 @@ module MerchantSite
 
     def edit
       @merchant = Merchant.find(params[:merchant_id])
-      @item = Item.find(params[:id]) 
+      @item = Item.find(params[:id])
     end
 
     def update
       @merchant = Merchant.find(params[:merchant_id])
       @item = Item.find(params[:id])
       @item.update(item_params)
-      # require 'pry' ; binding.pry
       if params[:status]
         redirect_to merchant_items_path(@merchant)
       else
@@ -28,7 +27,7 @@ module MerchantSite
     end
 
     private
-    # Strong Params
+
     def item_params
       params.permit(:name, :description, :unit_price, :status)
     end

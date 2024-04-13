@@ -1,0 +1,7 @@
+<h1> All Merchants </h1>
+
+<ul>
+  <%= @all_merchants.each do |merchant| %>
+    <li> <p> <%= link_to "#{merchant.name}", "/merchant/#{merchant.id}/dashboard" %> </p> </li>
+  <% end %>
+</ul>

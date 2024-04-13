@@ -4,6 +4,7 @@ module MerchantSite
     end
 
     def show
+      @invoice = Invoice.find(:invoice_id)
     end
   end
 end

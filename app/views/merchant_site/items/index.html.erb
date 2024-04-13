@@ -2,7 +2,7 @@
 
 <section class="name_of_items">
   <ul>
-    <% @merchant.all_items.each do |item| %>
+    <% @merchant.items.order(:id).each do |item| %>
       <div id="item_block_<%= item.id %>">
         <li>
           <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %> </p>
