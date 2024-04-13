@@ -11,7 +11,6 @@ RSpec.describe "Merchant dashboard" do
     expect(page).to have_content(@merchants_list[0].name)
     expect(page).to have_content(@merchants_list[1].name)
     expect(page).to have_content(@merchants_list[2].name)
-    expect(page).to have_content("Status: Enabled")
   end
 
   it "has a link to each merchant's show page" do
@@ -28,7 +27,6 @@ RSpec.describe "Merchant dashboard" do
     visit "/admin/merchants"
 
     within "#merchant-#{@merchants_list[0].id}" do
-      expect(page).to have_button("enable")
       expect(page).to have_button("disable")
       click_button("disable")
     end
@@ -36,14 +34,14 @@ RSpec.describe "Merchant dashboard" do
     expect(page).to have_current_path("/admin/merchants")
 
     within "#merchant-#{@merchants_list[0].id}" do
-      expect(page).to have_content("Status: Disabled")
+      expect(page).to have_button("enable")
       click_button("enable")
     end
 
     expect(page).to have_current_path("/admin/merchants")
 
     within "#merchant-#{@merchants_list[0].id}" do
-      expect(page).to have_content("Status: Enabled")
+      expect(page).to have_button("disable")
     end
   end
 end

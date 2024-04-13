@@ -14,12 +14,16 @@ module AdminSite
 
     def update
       @merchant = Merchant.find(params[:id])
-      if params[:name].nil? || params[:name] == ""
+      if params[:status] != @merchant.status
+        @merchant.update(merchant_update_params)
+        redirect_to("/admin/merchants")
+      elsif params[:name].nil? || params[:name] == ""
         flash[:alert] = "You did not provide a valid name for this merchant."
         redirect_to("/admin/merchants/#{params[:id]}/edit")
       else
         @merchant.update(merchant_update_params)
-        flash[:alert] = "You have successfully updated this merchant's information."
+        flash[:alert] =
+          "You have successfully updated this merchant's information."
         redirect_to("/admin/merchants/#{params[:id]}")
       end
     end
@@ -27,7 +31,7 @@ module AdminSite
     private
 
     def merchant_update_params
-      params.permit(:name)
+      params.permit(:name, :status)
     end
   end
 end
