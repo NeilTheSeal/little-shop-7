@@ -1,13 +1,6 @@
 <%= render partial: "admin_site/admin_navbar" %>
 
 <div class="full-width-content">
-
-  <% flash.each do |type, msg| %>
-    <div class="flash-msg">
-      <%= msg %>
-    </div>
-  <% end %>
-
   <div class="full-width-header">Edit information for <%= @merchant.name %></div>
   <%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, class: "edit-merchant-form" do |form| %>
     <%= form.label :name, "Merchant Name: " %>
