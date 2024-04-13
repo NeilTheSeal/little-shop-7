@@ -4,7 +4,7 @@
   
   <div class="content-column">
     <div class="content-header">Enabled Merchants</div>
-    <ol class="content-ordered-list">
+    <ol class="content-ordered-list" id="enabled-merchants">
       <% @merchants.each do |merchant| %>
         <% if merchant.status == "enabled" %>
           <li class="ordered-list-item" id="merchant-<%= merchant.id %>">
@@ -20,7 +20,7 @@
     </ol>
 
     <div class="content-header">Disabled Merchants</div>
-    <ol class="content-ordered-list">
+    <ol class="content-ordered-list" id="disabled-merchants">
       <% @merchants.each do |merchant| %>
         <% if merchant.status == "disabled" %>
           <li class="ordered-list-item" id="merchant-<%= merchant.id %>">
