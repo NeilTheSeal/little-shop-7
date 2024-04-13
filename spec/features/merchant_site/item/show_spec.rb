@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant_items#index', type: :feature do
+RSpec.describe 'Merchant_items#show', type: :feature do
   before(:each) do
     @merchant = create(:merchant)
     @merchant2 = create(:merchant)
@@ -37,20 +37,24 @@ RSpec.describe 'Merchant_items#index', type: :feature do
     end
   end
 
-  # 6. Merchant Items Index Page
-  it "list of all the names" do
-  # As a merchant,
-  # When I visit my merchant items index page (merchants/:merchant_id/items)
-  visit merchant_items_path(@merchant)
-  # I see a list of the names of all of my items
-  within '.name_of_items' do
-    expect(page).to have_content(@item_list[0].name)
-    expect(page).to have_content(@item_list[1].name)
-    expect(page).to have_content(@item_list[2].name)
-    expect(page).to have_content(@item_list[3].name)
-    expect(page).to have_content(@item_list[4].name)
+  # User Story 7
+  it 'merchant item show page lists name, description, and selling price' do
+    # As a merchant,
+    # When I click on the name of an item from the merchant items index page, (merchants/:merchant_id/items)
+    visit merchant_items_path(@merchant)
+    click_link "#{@item_list[0].name}"
+    save_and_open_page
+    # Then I am taken to that merchant's item's show page (/merchants/:merchant_id/items/:item_id)
+    expect(current_path).to eq(merchant_item_path(@merchant, @item_list[0]))  
+    # And I see all of the item's attributes including:
+    within ".item_attributes" do
+      # Name
+      expect(page).to have_content("#{@item_list[0].name}")
+      # Description
+      expect(page).to have_content("Item Description: #{@item_list[0].description}")
+      # Current Selling Price 
+      expect(page).to have_content("Current Selling Price: #{@item_list[0].formatted_unit_price}")     
+    end
   end
-  # And I do not see items for any other merchant
-  expect(page).to_not have_content(@item_list2[0].name) # We might need to fix - random data everytime, hard to eliminate certain items
-  end
+
 end

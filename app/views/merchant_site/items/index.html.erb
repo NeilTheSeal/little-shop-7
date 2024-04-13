@@ -2,6 +2,6 @@
 
 <section class="name_of_items">
   <% @merchant.all_items.each do |item| %>
-    <h3><%= item.name %></h3>
+    <h3> <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %> </h3>
   <% end %>
 </section>
