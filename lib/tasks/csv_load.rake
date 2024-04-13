@@ -34,6 +34,7 @@ namespace :csv_load do
     file_path = "db/data/items.csv"
     Item.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
+      row[:status] = 0
       Item.create!(row.to_hash)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!("items")
