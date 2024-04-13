@@ -3,12 +3,35 @@
 <div class="page-content">
   
   <div class="content-column">
-    <div class="content-header">List of Merchants</div>
+    <div class="content-header">Enabled Merchants</div>
     <ol class="content-ordered-list">
       <% @merchants.each do |merchant| %>
-        <li class="ordered-list-item">
-          <%= link_to merchant.name, admin_site_merchant_path(merchant) %>
-        </li>
+        <% if merchant.status == "enabled" %>
+          <li class="ordered-list-item" id="merchant-<%= merchant.id %>">
+            <%= link_to merchant.name, admin_site_merchant_path(merchant) %>
+            <%= form_with url: admin_site_merchant_path(merchant), method: :patch do |form| %>
+              <%= form.hidden_field :name, value: merchant.name %>
+              <%= form.hidden_field :status, value: "disabled" %>
+              <%= form.submit "disable" %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ol>
+
+    <div class="content-header">Disabled Merchants</div>
+    <ol class="content-ordered-list">
+      <% @merchants.each do |merchant| %>
+        <% if merchant.status == "disabled" %>
+          <li class="ordered-list-item" id="merchant-<%= merchant.id %>">
+            <%= link_to merchant.name, admin_site_merchant_path(merchant) %>
+            <%= form_with url: admin_site_merchant_path(merchant), method: :patch do |form| %>
+              <%= form.hidden_field :name, value: merchant.name %>
+              <%= form.hidden_field :status, value: "enabled" %>
+              <%= form.submit "enable" %>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
     </ol>
   </div>
