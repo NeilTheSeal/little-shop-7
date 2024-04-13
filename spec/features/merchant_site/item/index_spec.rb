@@ -56,8 +56,8 @@ RSpec.describe 'Merchant_items#index', type: :feature do
   # User Story 9
   it 'update item button' do
     # As a merchant, when I visit my items index page (/merchants/:merchant_id/items)
-    visit merchant_items_path(@merchant, @item_list[0])
-    save_and_open_page
+    visit merchant_items_path(@merchant)
+    # save_and_open_page
     # Next to each item name I see a button to disable or enable that item.
     within "#item_block_#{@item_list[0].id}" do
       expect(page).to have_button("Enable")

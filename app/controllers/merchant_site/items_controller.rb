@@ -18,7 +18,7 @@ module MerchantSite
       @merchant = Merchant.find(params[:merchant_id])
       @item = Item.find(params[:id])
       @item.update(item_params)
-
+      flash[:notice] = "Item Updated"
       redirect_to merchant_item_path(@merchant, @item)
     end
 

@@ -38,11 +38,11 @@ RSpec.describe 'Merchant_items#show', type: :feature do
   end
 
   # User Story 7
-  xit 'merchant item show page lists name, description, and selling price' do
+  it 'merchant item show page lists name, description, and selling price' do
     # As a merchant, when I click on the name of an item from the merchant items index page, (merchants/:merchant_id/items)
     visit merchant_items_path(@merchant)
     click_link "#{@item_list[0].name}"
-    save_and_open_page
+    # save_and_open_page
     # Then I am taken to that merchant's item's show page (/merchants/:merchant_id/items/:item_id)
     expect(current_path).to eq(merchant_item_path(@merchant, @item_list[0]))  
     # And I see all of the item's attributes including:
@@ -57,11 +57,11 @@ RSpec.describe 'Merchant_items#show', type: :feature do
   end
 
   # User Story 8
-  xit 'update item button' do
+  it 'update item button' do
     # As a merchant,when I visit the merchant show page of an item (/merchants/:merchant_id/items/:item_id)
-    visit merchant_items_path(@merchant, @item_list[0])
+    visit merchant_item_path(@merchant, @item_list[0])
     # I see a link to update the item information.
-    expect(page).to have_button("Update Item")
+    expect(page).to have_link("Update Item")
     # When I click the link
     click_link "Update Item"
     # Then I am taken to a page to edit this item
@@ -69,11 +69,17 @@ RSpec.describe 'Merchant_items#show', type: :feature do
     # And I see a form filled in with the existing item attribute information
     # When I update the information in the form and I click ‘submit’
 
-    fill_in 
+    fill_in "Item Name:", with: "Spaghetti"
+    fill_in "Item Description:", with: "I like pasta"
+    fill_in "Item Selling Price (in cents):", with: "1100"
+
     click_button "Update Item"
     
     # Then I am redirected back to the item show page where I see the updated information
     expect(current_path).to eq(merchant_item_path(@merchant, @item_list[0]))
     # And I see a flash message stating that the information has been successfully updated.
+    expect(page).to have_content("Spaghetti")
+    expect(page).to have_content("I like pasta")
+    expect(page).to have_content("$11.0")
   end
 end
