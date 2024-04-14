@@ -57,4 +57,12 @@ RSpec.describe "Merchant dashboard" do
       expect(page).to have_content(@disabled_merchant.name)
     end
   end
+
+  it "has a link to create a new merchant" do
+    visit "/admin/merchants"
+
+    click_link("New Merchant")
+
+    expect(page).to have_current_path("/admin/merchants/new")
+  end
 end
