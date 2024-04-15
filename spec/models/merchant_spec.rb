@@ -262,18 +262,62 @@ RSpec.describe Merchant, type: :model do
   describe "date with most revenue" do
     it "shows the date with the most revenue made for each merchant" do
       merchant = create(:merchant)
-      item = create(:item, merchant: merchant, unit_price: 1000)
+      item = create(:item, merchant:, unit_price: 1000)
       customer = create(:customer)
-      invoice1 = create(:invoice, customer: customer, created_at: "2020-01-01 00:00:00")
-      invoice2 = create(:invoice, customer: customer, created_at: "2021-01-01 00:00:00")
-      invoice3 = create(:invoice, customer: customer, created_at: "2022-01-01 00:00:00")
-      invoice_item1 = create(:invoice_item, item: item, invoice: invoice1, quantity: 1, unit_price: item.unit_price)
-      invoice_item2 = create(:invoice_item, item: item, invoice: invoice2, quantity: 2, unit_price: item.unit_price)
-      invoice_item3 = create(:invoice_item, item: item, invoice: invoice3, quantity: 2, unit_price: item.unit_price)
+      invoice1 = create(
+        :invoice,
+        customer:,
+        created_at: "2020-01-01 00:00:00"
+      )
+      invoice2 = create(
+        :invoice,
+        customer:,
+        created_at: "2021-01-01 00:00:00"
+      )
+      invoice3 = create(
+        :invoice,
+        customer:,
+        created_at: "2022-01-01 00:00:00"
+      )
+      create(
+        :invoice_item,
+        item:,
+        invoice: invoice1,
+        quantity: 1,
+        unit_price: item.unit_price
+      )
+      create(
+        :invoice_item,
+        item:,
+        invoice: invoice2,
+        quantity: 1,
+        unit_price: item.unit_price
+      )
+      create(
+        :invoice_item,
+        item:,
+        invoice: invoice2,
+        quantity: 1,
+        unit_price: item.unit_price
+      )
+      create(
+        :invoice_item,
+        item:,
+        invoice: invoice3,
+        quantity: 1,
+        unit_price: item.unit_price
+      )
+      create(
+        :invoice_item,
+        item:,
+        invoice: invoice3,
+        quantity: 1,
+        unit_price: item.unit_price
+      )
 
-require 'pry'; binding.pry
-
-      expect(merchant.date_of_most_revenue).to eq("2022-01-01 00:00:00")
+      expect(merchant.date_of_most_revenue).to eq(
+        "Saturday, January 01, 2022 at 12:00 AM"
+      )
     end
   end
 end
