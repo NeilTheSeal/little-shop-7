@@ -1,1 +1,9 @@
 <h1> Show Page </h1>
+
+<section class="invoice_attributes">
+  <h3><%= @invoice.id %></h3>
+  <p><%= @invoice.status %></p>
+  <p><%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+</section>
+<h3>Customer Name:</h3>
+<p><%= @customer.first_name %> <%= @customer.last_name %></p>

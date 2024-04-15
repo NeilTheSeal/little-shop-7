@@ -20,4 +20,8 @@ class Merchant < ApplicationRecord
     invoice_items.joins(:invoice).where("invoice_items.status != '2'")
                  .order("invoices.created_at")
   end
+
+  def unique_invoices
+    self.invoices.distinct
+  end
 end
