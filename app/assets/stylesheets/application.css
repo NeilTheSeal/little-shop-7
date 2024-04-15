@@ -122,6 +122,10 @@ body {
   opacity: 0.7;
 }
 
+#top-merchants {
+  font-size: 15px;
+}
+
 #flash_message {
   position: absolute;
   left: 50vw;

@@ -344,6 +344,9 @@ RSpec.describe "Merchant dashboard" do
         quantity: 1,
         unit_price: item.unit_price
       )
+      create(:transaction, invoice: invoice1)
+      create(:transaction, invoice: invoice2)
+      create(:transaction, invoice: invoice3)
     end
 
     it "lists the date of top revenue for each merchant" do
@@ -351,7 +354,7 @@ RSpec.describe "Merchant dashboard" do
 
       within "#top-merchants" do
         expect(page).to have_content(
-          "Date with the highest revenue: Saturday, January 01, 2022 at 12:00 AM"
+          "Date with the highest revenue:   Saturday, January 01, 2022 at 12:00 AM"
         )
       end
     end

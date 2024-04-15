@@ -45,6 +45,7 @@
         <li class="ordered-list-item">
           <%= link_to merchant.merchant_name, admin_site_merchant_path(merchant) %>
           <div class="revenue">Total sales: $<%= number_with_delimiter(merchant.total_revenue / 100, :delimiter => ',') %></div>
+          <div class="revenue">Date with the highest revenue: <br>&nbsp;&nbsp;<%= merchant.date_of_most_revenue %></div>
         </li>
       <% end %>
     </ol>
