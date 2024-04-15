@@ -20,6 +20,8 @@ RSpec.describe "Create new merchant" do
 
     expect(page).to have_current_path("/admin/merchants")
 
-    # within("#merchant-#{}")
+    within("#disabled-merchants") do
+      expect(page).to have_content("Stonks Corp")
+    end
   end
 end
