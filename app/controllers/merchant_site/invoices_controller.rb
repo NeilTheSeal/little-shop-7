@@ -9,6 +9,7 @@ module MerchantSite
     def show
       @invoice = Invoice.find(params[:id])
       @customer = @invoice.customer
+      
       # require 'pry' ; binding.pry
     end
   end

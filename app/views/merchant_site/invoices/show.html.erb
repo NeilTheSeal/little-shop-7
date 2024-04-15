@@ -7,3 +7,13 @@
 </section>
 <h3>Customer Name:</h3>
 <p><%= @customer.first_name %> <%= @customer.last_name %></p>
+
+<h3>All Items in Invoice:</h3>
+<section class="invoice_item_info">
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <h3><%= invoice_item.item.name %></h3>
+    <p><%= invoice_item.quantity %></p>
+    <p><%= invoice_item.formatted_unit_price_invoice_item %></p>
+    <p><%= invoice_item.status %></p>
+  <% end %>
+</section>
