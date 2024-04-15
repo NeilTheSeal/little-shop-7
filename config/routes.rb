@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources(
       :items,
       controller: "merchant_site/items",
-      only: %i[index show edit update]
+      only: %i[index show edit update new create]
     )
     resources(
       :invoices,

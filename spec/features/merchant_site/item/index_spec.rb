@@ -87,13 +87,12 @@ RSpec.describe 'Merchant_items#index', type: :feature do
     # Then I am redirected back to the items index
   end
 
-  # 10. Merchant Items Grouped by Status
+  # User Story 10
   it "Merchant Items status listed in the appropiate section" do
-  # As a merchant,
-  # When I visit my merchant items index page
+    # As a merchant, when I visit my merchant items index page
     visit merchant_items_path(@merchant)
-  # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
-  # And I see that each Item is listed in the appropriate section
+    # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
+    # And I see that each Item is listed in the appropriate section
     within '.disabled_items' do
       expect(page).to have_content("Disabled Items:")
       expect(page).to have_link(@item_list2[0].name)
@@ -103,5 +102,35 @@ RSpec.describe 'Merchant_items#index', type: :feature do
       expect(page).to have_content("Enabled Items:")
       expect(page).to have_link(@item_list[0].name)
     end
+  end
+
+  # User Story 11
+  it 'has ' do
+    # As a merchant, when I visit my items index page
+    visit merchant_items_path(@merchant)
+    # I see a link to create a new item.
+    expect(page).to have_link("New Item")
+
+    # When I click on the link,
+    click_link("New Item")
+
+    # I am taken to a form that allows me to add item information.
+    expect(current_path).to eq("/merchant/#{@merchant.id}/items/new")
+
+    # When I fill out the form I click ‘Submit’
+    fill_in :name, with: "Cookies"
+    fill_in :description, with: "Cookies"
+    fill_in :unit_price, with: 1100
+    click_button "Create Item"
+
+    # Then I am taken back to the items index page
+    expect(current_path).to eq("/merchant/#{@merchant.id}/items")
+    
+    # And I see the item I just created displayed in the list of items.
+    # And I see my item was created with a default status of disabled.
+    within '.disabled_items' do
+      expect(page).to have_content("Cookies")
+    end
+
   end
 end

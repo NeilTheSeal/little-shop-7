@@ -10,6 +10,10 @@ module MerchantSite
       @item = Item.find(params[:id])
     end
 
+    def new
+      @merchant = Merchant.find(params[:merchant_id])
+    end
+
     def edit
       @merchant = Merchant.find(params[:merchant_id])
       @item = Item.find(params[:id])
@@ -18,12 +22,20 @@ module MerchantSite
     def update
       @item = Item.find(params[:id])
       @item.update(item_params)
+      
       if params[:status]
         redirect_to merchant_items_path(params[:merchant_id])
       else
         flash[:notice] = "Item Updated"
         redirect_to merchant_item_path(params[:merchant_id], @item)
       end
+    end
+
+    def create
+      @merchant = Merchant.find(params[:merchant_id])
+      @merchant.items.create!(item_params)
+
+      redirect_to "/merchant/#{@merchant.id}/items"
     end
 
     private
