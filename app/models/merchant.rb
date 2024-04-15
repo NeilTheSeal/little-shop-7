@@ -20,4 +20,13 @@ class Merchant < ApplicationRecord
     invoice_items.joins(:invoice).where("invoice_items.status != '2'")
                  .order("invoices.created_at")
   end
+
+  def self.top_5_merchants
+    Merchant.joins(:transactions)
+            .where("transactions.result = 1")
+            .select("SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue, merchants.name AS merchant_name")
+            .group("merchants.name")
+            .order("total_revenue DESC")
+            .limit(5)
+  end
 end
