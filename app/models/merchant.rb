@@ -21,11 +21,11 @@ class Merchant < ApplicationRecord
                  .order("invoices.created_at")
   end
 
-  def self.top_5_merchants
+  def self.top_five_merchants
     Merchant.joins(:transactions)
             .where("transactions.result = 1")
-            .select("SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue, merchants.name AS merchant_name")
-            .group("merchants.name")
+            .select("SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue, merchants.name AS merchant_name, merchants.id")
+            .group("merchants.name, merchants.id")
             .order("total_revenue DESC")
             .limit(5)
   end

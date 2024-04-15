@@ -210,9 +210,11 @@ RSpec.describe "Merchant dashboard" do
   it "has a link to each merchant's show page" do
     visit "/admin/merchants"
 
-    expect(page).to have_link(@merchants_list[0].name)
+    within("#merchant-#{@merchants_list[0].id}") do
+      expect(page).to have_link(@merchants_list[0].name)
 
-    click_link(@merchants_list[0].name)
+      click_link(@merchants_list[0].name)
+    end
 
     expect(page).to have_current_path("/admin/merchants/#{@merchants_list[0].id}")
   end
@@ -268,6 +270,11 @@ RSpec.describe "Merchant dashboard" do
       expect(@merchants[3].name).to appear_before(@merchants[2].name)
       expect(@merchants[2].name).to appear_before(@merchants[1].name)
       expect(page).to_not have_content(@merchants[0].name)
+      expect(page).to have_content("Total sales: $80")
+      expect(page).to have_content("Total sales: $70")
+      expect(page).to have_content("Total sales: $60")
+      expect(page).to have_content("Total sales: $50")
+      expect(page).to have_content("Total sales: $40")
     end
   end
 

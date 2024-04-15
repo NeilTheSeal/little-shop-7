@@ -2,6 +2,7 @@ module AdminSite
   class MerchantsController < ApplicationController
     def index
       @merchants = Merchant.order(:id)
+      @top_merchants = Merchant.top_five_merchants
     end
 
     def show
@@ -29,7 +30,6 @@ module AdminSite
     end
 
     def new
-
     end
 
     def create

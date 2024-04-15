@@ -250,7 +250,12 @@ RSpec.describe Merchant, type: :model do
     end
 
     it "can find the top 5 merchants" do
-      expect(Merchant.top_5_merchants[0].merchant_name).to eq(@merchants[5].name)
+      expect(Merchant.top_five_merchants[0].merchant_name).to eq(@merchants[5].name)
+      expect(Merchant.top_five_merchants[1].merchant_name).to eq(@merchants[4].name)
+      expect(Merchant.top_five_merchants[2].merchant_name).to eq(@merchants[3].name)
+      expect(Merchant.top_five_merchants[3].merchant_name).to eq(@merchants[2].name)
+      expect(Merchant.top_five_merchants[4].merchant_name).to eq(@merchants[1].name)
+      expect(Merchant.top_five_merchants[5].nil?).to eq(true)
     end
   end
 end

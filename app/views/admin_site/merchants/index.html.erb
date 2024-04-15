@@ -39,8 +39,15 @@
   </div>
 
   <div class="content-column">
-    <div class="content-header">We Dunno Yet</div>
-
+    <div class="content-header">Top Merchants</div>
+    <ol class="content-ordered-list" id="top-merchants">
+      <% @top_merchants.each do |merchant| %>
+        <li class="ordered-list-item">
+          <%= link_to merchant.merchant_name, admin_site_merchant_path(merchant) %>
+          <div class="revenue">Total sales: $<%= number_with_delimiter(merchant.total_revenue / 100, :delimiter => ',') %></div>
+        </li>
+      <% end %>
+    </ol>
   </div>
 
 </div>
