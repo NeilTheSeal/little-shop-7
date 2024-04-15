@@ -258,4 +258,22 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.top_five_merchants[5].nil?).to eq(true)
     end
   end
+
+  describe "date with most revenue" do
+    it "shows the date with the most revenue made for each merchant" do
+      merchant = create(:merchant)
+      item = create(:item, merchant: merchant, unit_price: 1000)
+      customer = create(:customer)
+      invoice1 = create(:invoice, customer: customer, created_at: "2020-01-01 00:00:00")
+      invoice2 = create(:invoice, customer: customer, created_at: "2021-01-01 00:00:00")
+      invoice3 = create(:invoice, customer: customer, created_at: "2022-01-01 00:00:00")
+      invoice_item1 = create(:invoice_item, item: item, invoice: invoice1, quantity: 1, unit_price: item.unit_price)
+      invoice_item2 = create(:invoice_item, item: item, invoice: invoice2, quantity: 2, unit_price: item.unit_price)
+      invoice_item3 = create(:invoice_item, item: item, invoice: invoice3, quantity: 2, unit_price: item.unit_price)
+
+require 'pry'; binding.pry
+
+      expect(merchant.date_of_most_revenue).to eq("2022-01-01 00:00:00")
+    end
+  end
 end
