@@ -1,1 +1,12 @@
 <%= render partial: "admin_site/admin_navbar" %>
+
+<div class="full-width-content">
+<div class="full-width-header">Invoice List</div>
+  <ol class="content-ordered-list">
+    <% @invoices.each do |invoice| %>
+      <li class="ordered-list-item" id="invoice-<%= invoice.id %>">
+        <%= link_to "Invoice ##{invoice.id}", admin_site_invoice_path(invoice) %>
+      </li>
+    <% end %>
+  </ol>
+</div>

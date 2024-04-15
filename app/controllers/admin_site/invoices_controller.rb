@@ -1,6 +1,8 @@
 module AdminSite
   class InvoicesController < ApplicationController
-    def index; end
+    def index
+      @invoices = Invoice.all
+    end
 
     def show
       @invoice = Invoice.find(params[:id])

@@ -22,35 +22,35 @@ RSpec.describe "Admin Invoice Show Page" do
     )
     create(
       :invoice_item,
-      item:,
+      item: @item,
       invoice: @invoice1,
       quantity: 1,
       unit_price: @item.unit_price
     )
     create(
       :invoice_item,
-      item:,
+      item: @item,
       invoice: @invoice2,
       quantity: 1,
       unit_price: @item.unit_price
     )
     create(
       :invoice_item,
-      item:,
+      item: @item,
       invoice: @invoice2,
       quantity: 1,
       unit_price: @item.unit_price
     )
     create(
       :invoice_item,
-      item:,
+      item: @item,
       invoice: @invoice3,
       quantity: 1,
       unit_price: @item.unit_price
     )
     create(
       :invoice_item,
-      item:,
+      item: @item,
       invoice: @invoice3,
       quantity: 1,
       unit_price: @item.unit_price
@@ -63,14 +63,14 @@ RSpec.describe "Admin Invoice Show Page" do
   it "has a list of all invoice id's in the system" do
     visit "/admin/invoices"
 
-    expect(page).to have_content(@invoice1.id)
-    expect(page).to have_content(@invoice2.id)
-    expect(page).to have_content(@invoice3.id)
+    expect(page).to have_content("Invoice ##{@invoice1.id}")
+    expect(page).to have_content("Invoice ##{@invoice2.id}")
+    expect(page).to have_content("Invoice ##{@invoice3.id}")
   end
 
   it "links to the invoice show page" do
     visit "/admin/invoices"
-    click_link(@invoice1.id)
+    click_link("Invoice ##{@invoice1.id}")
 
     expect(page).to have_current_path("/admin/invoices/#{@invoice1.id}")
   end
