@@ -1,19 +1,21 @@
-<h1> Show Page </h1>
+<h1> Invoice #<%= @invoice.id %> Show Page </h1>
 
 <section class="invoice_attributes">
-  <h3><%= @invoice.id %></h3>
-  <p><%= @invoice.status %></p>
-  <p><%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+  <h3> Invoice #<%= @invoice.id %> </h3>
+  <p> Invoice Status: <%= @invoice.status %></p>
+  <p> Invoice Created: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 </section>
 <h3>Customer Name:</h3>
 <p><%= @customer.first_name %> <%= @customer.last_name %></p>
 
-<h3>All Items in Invoice:</h3>
+<h3> All Items in Invoice: </h3>
 <section class="invoice_item_info">
+<ul>
   <% @invoice.invoice_items.each do |invoice_item| %>
-    <h3><%= invoice_item.item.name %></h3>
-    <p><%= invoice_item.quantity %></p>
-    <p><%= invoice_item.formatted_unit_price_invoice_item %></p>
-    <p><%= invoice_item.status %></p>
+    <li> <h3><%= invoice_item.item.name %></h3> </li>
+    <p> Quantity: <%= invoice_item.quantity %></p>
+    <p> Price: <%= invoice_item.formatted_unit_price_invoice_item %></p>
+    <p> Status: <%= invoice_item.status %></p>
   <% end %>
+</ul>
 </section>

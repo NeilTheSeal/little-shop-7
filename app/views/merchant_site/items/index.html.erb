@@ -3,7 +3,7 @@
 <%= link_to "New Item", new_merchant_item_path(@merchant), method: :get %>
 
 <section>
-  <h2> Top 5 Selling Items </h2>
+  <h3> Top Five Selling Items </h3>
     <ul>
       <% @merchant.top_five_items.each do |item| %>
           <li> <%= item.name %> </li>       

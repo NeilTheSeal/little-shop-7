@@ -1,7 +1,11 @@
+<h1> Merchant: <%= @merchant.name %> Invoices </h1>
+
 <section class="merchant_invoices">
-  <% @invoices.each do |invoice| %>
-    <div id="invoice-<%= invoice.id %>">
-      <%= link_to invoice.id, merchant_invoice_path(@merchant, invoice), method: :get %>
-    </div>
-  <% end %>
+  <ul>
+    <% @invoices.each do |invoice| %>
+      <div id="invoice-<%= invoice.id %>">
+        <p><li> <%= link_to "Invoice ##{invoice.id}", merchant_invoice_path(@merchant, invoice), method: :get %> </li></p>
+      </div>
+    <% end %>
+  </ul>  
 </section>
