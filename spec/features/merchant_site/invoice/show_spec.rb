@@ -37,10 +37,9 @@ RSpec.describe 'merchant_invoices#index', type: :feature do
     end
   end
   
-  # 15. Merchant Invoice Show Page
+  # User Story 15
   it "merchant invoices attributes with their customer" do
-    # As a merchant
-    # When I visit my merchant's invoice show page (/merchants/:merchant_id/invoices/:invoice_id)
+    # As a merchant, when I visit my merchant's invoice show page (/merchants/:merchant_id/invoices/:invoice_id)
     visit merchant_invoice_path(@merchant, @invoice_list[0])
     # Then I see information related to that invoice including:
     # save_and_open_page
@@ -57,10 +56,9 @@ RSpec.describe 'merchant_invoices#index', type: :feature do
     expect(page).to have_content(@customer_list[0].last_name)      
   end
 
-  # 16. Merchant Invoice Show Page: Invoice Item Information
-  it "" do
-  # As a merchant
-  # When I visit my merchant invoice show page (/merchants/:merchant_id/invoices/:invoice_id)
+  # User Story 16
+  it "Invoice Item Information" do
+  # As a merchant, when I visit my merchant invoice show page (/merchants/:merchant_id/invoices/:invoice_id)
   visit merchant_invoice_path(@merchant, @invoice_list[0])
   # Then I see all of my items on the invoice including:
   within '.invoice_item_info' do
@@ -69,7 +67,7 @@ RSpec.describe 'merchant_invoices#index', type: :feature do
     # - The quantity of the item ordered
     expect(page).to have_content(@invoice_item_list[0].quantity)
     # - The price the Item sold for
-    expect(page).to have_content(@invoice_item_list[0].unit_price)
+    expect(page).to have_content(@invoice_item_list[0].formatted_unit_price_invoice_item)
     # - The Invoice Item status
     expect(page).to have_content(@invoice_item_list[0].status)    
   end

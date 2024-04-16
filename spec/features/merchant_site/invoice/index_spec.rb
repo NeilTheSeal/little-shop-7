@@ -38,10 +38,9 @@ RSpec.describe 'merchant_invoices#index', type: :feature do
 
   end
   
-  # 14. Merchant Invoices Index
+  # User Story 14
   it "merchant invoices link to its show page" do
-    # As a merchant,
-    # When I visit my merchant's invoices index (/merchants/:merchant_id/invoices)
+    # As a merchant, when I visit my merchant's invoices index (/merchants/:merchant_id/invoices)
     visit merchant_invoices_path(@merchant)
     # save_and_open_page
     within '.merchant_invoices' do

@@ -2,6 +2,15 @@
 
 <%= link_to "New Item", new_merchant_item_path(@merchant), method: :get %>
 
+<section>
+  <h2> Top 5 Selling Items </h2>
+    <ul>
+      <% @merchant.top_five_items.each do |item| %>
+          <li> <%= item.name %> </li>       
+      <% end %>
+    </ul>
+<section>
+
 <section class="disabled_items">
   <h2>Disabled Items:</h2>
   <section class="name_of_items">
