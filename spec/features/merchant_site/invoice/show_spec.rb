@@ -22,7 +22,7 @@ RSpec.describe 'merchant_invoices#index', type: :feature do
     @item_list.each_with_index do |item, index|
       if index < 10
         @invoice_item_list << create(:invoice_item, item:,
-                                                  invoice: @invoice_list[index], unit_price: item.unit_price, status: "packaged")
+                                                  invoice: @invoice_list[index], unit_price: 200, quantity: 8, status: "packaged")
       elsif index < 15
         @invoice_item_list << create(:invoice_item, item:,
                                                   invoice: @invoice_list[index], unit_price: item.unit_price, status: "pending")
@@ -72,6 +72,16 @@ RSpec.describe 'merchant_invoices#index', type: :feature do
     expect(page).to have_content(@invoice_item_list[0].status)    
   end
   # And I do not see any information related to Items for other merchants
+  end
 
+  # 17. Merchant Invoice Show Page: Total Revenue
+  it "total revenue for the invoice item" do
+    # As a merchant
+    # When I visit my merchant invoice show page (/merchants/:merchant_id/invoices/:invoice_id)
+    visit merchant_invoice_path(@merchant, @invoice_list[0])
+    # Then I see the total revenue that will be generated from all of my items on the invoice
+    within '.total_revenue' do
+      expect(page).to have_content("Total Revenue: 1600")
+    end
   end
 end 
