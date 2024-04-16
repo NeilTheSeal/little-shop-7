@@ -105,7 +105,7 @@ RSpec.describe 'Merchant_items#index', type: :feature do
   end
 
   # User Story 11
-  it 'has ' do
+  it 'has a create new item link' do
     # As a merchant, when I visit my items index page
     visit merchant_items_path(@merchant)
     # I see a link to create a new item.
@@ -131,6 +131,36 @@ RSpec.describe 'Merchant_items#index', type: :feature do
     within '.disabled_items' do
       expect(page).to have_content("Cookies")
     end
-
   end
+
+  # User Story 12
+  it 'has top 5 selling items for that merchant' do
+    # As a merchant, when I visit my items index page
+    visit merchant_items_path(@merchant)
+    save_and_open_page
+    # Then I see the names of the top 5 most popular items ranked by total revenue generated
+    # And I see that each item name links to my merchant item show page for that item
+    # And I see the total revenue generated next to each item name    
+    within '.top_5_items' do
+      expect(@merchant.top_five_items[0].name).to appear_before(@merchant.top_five_items[1].name)
+      expect(@merchant.top_five_items[0].formatted_ivi_revenue_price).to appear_before(@merchant.top_five_items[1].formatted_ivi_revenue_price)
+      expect(page).to have_link(@merchant.top_five_items[0].name)
+      expect(@merchant.top_five_items[1].name).to appear_before(@merchant.top_five_items[2].name)
+      expect(@merchant.top_five_items[1].formatted_ivi_revenue_price).to appear_before(@merchant.top_five_items[2].formatted_ivi_revenue_price)
+      expect(page).to have_link(@merchant.top_five_items[1].name)
+      expect(@merchant.top_five_items[2].name).to appear_before(@merchant.top_five_items[3].name)
+      expect(@merchant.top_five_items[2].formatted_ivi_revenue_price).to appear_before(@merchant.top_five_items[3].formatted_ivi_revenue_price)
+      expect(page).to have_link(@merchant.top_five_items[2].name)
+      expect(@merchant.top_five_items[3].name).to appear_before(@merchant.top_five_items[4].name)
+      expect(@merchant.top_five_items[3].formatted_ivi_revenue_price).to appear_before(@merchant.top_five_items[4].formatted_ivi_revenue_price)
+      expect(page).to have_link(@merchant.top_five_items[3].name)
+      expect(page).to have_link(@merchant.top_five_items[4].name)
+    end
+    # Notes on Revenue Calculation:
+    # - Only invoices with at least one successful transaction should count towards revenue
+    # - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+    # - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+  end
+
+
 end

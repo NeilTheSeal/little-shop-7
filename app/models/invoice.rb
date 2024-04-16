@@ -8,8 +8,10 @@ class Invoice < ApplicationRecord
   enum :status, ["cancelled", "in progress", "completed"]
 
   def self.unshipped_invoices
-    Invoice.joins(:invoice_items).where("invoice_items.status != 2")
-           .group("invoices.id")
-           .order(:created_at)
+    self
+      .joins(:invoice_items)
+      .where("invoice_items.status != 2")
+      .group("invoices.id")
+      .order(:created_at)
   end
 end

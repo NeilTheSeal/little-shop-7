@@ -2,11 +2,12 @@
 
 <%= link_to "New Item", new_merchant_item_path(@merchant), method: :get %>
 
-<section>
+<section class="top_5_items">
   <h3> Top Five Selling Items </h3>
     <ul>
       <% @merchant.top_five_items.each do |item| %>
-        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> | <%= item.formatted_ivi_revenue_price %> </li>
+        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> | <%= item.formatted_ivi_revenue_price %> | <%= item.formatted_created_at %> </li>
+        <p> Top Selling Date for Item: <%= item %> </p>
       <% end %>
     </ul>
 <section>
