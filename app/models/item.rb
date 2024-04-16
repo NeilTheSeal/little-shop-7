@@ -11,6 +11,10 @@ class Item < ApplicationRecord
     "$#{unit_price.to_f / 100}"
   end
 
+  def formatted_ivi_revenue_price
+    "$#{ivi_revenue.to_f / 100}"
+  end
+
   def self.enabled_items
     where(status: :enabled)
   end
