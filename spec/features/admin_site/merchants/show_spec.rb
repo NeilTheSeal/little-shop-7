@@ -16,6 +16,8 @@ RSpec.describe "Merchant show page" do
   it "does not show flash message before merchant info has been updated" do
     visit "/admin/merchants/#{@merchant.id}"
 
-    expect(page).to_not have_content("You have successfully updated this merchant's information.")
+    expect(page).to_not have_content(
+      "You have successfully updated this merchant's information."
+    )
   end
 end

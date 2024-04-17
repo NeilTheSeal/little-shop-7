@@ -17,6 +17,12 @@ RSpec.describe "Merchant edit page" do
   it "can update the merchant info" do
     visit "/admin/merchants/#{@merchant.id}/edit"
 
+    fill_in("name", with: "")
+    click_button("update")
+
+    expect(page).to have_current_path("/admin/merchants/#{@merchant.id}/edit")
+    expect(page).to have_content("You did not provide a valid name for this merchant.")
+
     fill_in("name", with: "John Doe")
     click_button("update")
 

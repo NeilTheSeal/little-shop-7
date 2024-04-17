@@ -4,14 +4,13 @@
 
 <section class="top_5_items">
   <h3> Top Five Selling Items </h3>
-    <ul>
-      <% @merchant.top_five_items.each do |item| %>
-        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> | <%= number_with_precision(item.ivi_revenue / 100, :precision => 2, :delimiter => ',') %> </li>
-
-        <p> Top Selling Date for Item: <%= item.top_selling_date %> </p>
-      <% end %>
-    </ul>
-<section>
+  <ul>
+    <% @merchant.top_five_items.each do |item| %>
+      <li> <%= link_to item.name, merchant_item_path(@merchant, item), method: :get %> | <%= number_with_precision(item.ivi_revenue / 100, :precision => 2, :delimiter => ',') %> </li>
+      <p> Top Selling Date for Item: <%= item.top_selling_date %> </p>
+    <% end %>
+  </ul>
+</section>
 
 <section class="disabled_items">
   <h2>Disabled Items:</h2>

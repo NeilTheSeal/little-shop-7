@@ -74,6 +74,4 @@ RSpec.describe "Admin Invoice Show Page" do
 
     expect(page).to have_current_path("/admin/invoices/#{@invoice1.id}")
   end
-
-
 end

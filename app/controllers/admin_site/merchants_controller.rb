@@ -37,8 +37,8 @@ module AdminSite
       if merchant.save
         redirect_to("/admin/merchants")
       else
-        redirect_to("/admin/merchants/new")
         flash[:alert] = "Error: #{merchant.errors.full_messages}"
+        redirect_to("/admin/merchants/new")
       end
     end
 
