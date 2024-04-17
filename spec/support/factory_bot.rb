@@ -27,7 +27,7 @@ FactoryBot.define do
   end
 
   factory :invoice_item, class: InvoiceItem do
-    quantity { rand(1..10) }
+    quantity { 1 }
     status { 0 }
   end
 

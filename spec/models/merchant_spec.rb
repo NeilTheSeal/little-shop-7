@@ -65,12 +65,12 @@ RSpec.describe Merchant, type: :model do
       @dummy_customer = create(:customer)
       @failure_customer = create(:customer)
 
-      # merchants[0] = 3000
-      # merchants[1] = 4000
-      # merchants[2] = 5000
-      # merchants[3] = 6000
-      # merchants[4] = 7000
-      # merchants[5] = 8000
+      # merchants[0] = $30.00
+      # merchants[1] = $40.00
+      # merchants[2] = $50.00
+      # merchants[3] = $60.00
+      # merchants[4] = $70.00
+      # merchants[5] = $80.00
 
       @item_list1 = create_list(
         :item,
@@ -137,6 +137,7 @@ RSpec.describe Merchant, type: :model do
         2,
         customer: @customers[4]
       )
+
       @dummy_invoice = create(:invoice, customer: @dummy_customer)
       @failure_invoice = create(:invoice, customer: @failure_customer)
 

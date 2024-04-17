@@ -25,8 +25,8 @@ RSpec.describe Customer do
     @customer5_invoice_list.each { |invoice| create(:transaction, invoice:) }
   end
 
-  describe 'class methods' do
-    xit '#top_customers' do
+  describe "class methods" do
+    xit "#top_customers" do
       expect(Customer.top_customers).to eq("asdasd")
     end
   end
