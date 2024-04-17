@@ -1,1 +1,33 @@
-<h1> Show Page </h1>
+<h1> Invoice #<%= @invoice.id %> Show Page </h1>
+
+<section class="invoice_attributes">
+  <h3> Invoice #<%= @invoice.id %> </h3>
+  <p> Invoice Status: <%= @invoice.status %></p>
+  <p> Invoice Created: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+</section>
+<h3>Customer Name:</h3>
+<p><%= @customer.first_name %> <%= @customer.last_name %></p>
+
+<h3> All Items in Invoice: </h3>
+<section class="invoice_item_info">
+<ul>
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <div id="invoice_item-<%= invoice_item.id %>">
+      <li> <h3><%= invoice_item.item.name %></h3> </li>
+      <p> Quantity: <%= invoice_item.quantity %></p>
+      <p> Price: <%= invoice_item.formatted_unit_price_invoice_item %></p>
+      <p> Status: <%= invoice_item.status %></p>
+
+      <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, data: {turbo: false}, local: true do |f| %>
+        <%= f.hidden_field :ivi, :value => invoice_item.id %>
+        <%= f.select :status, ["packaged", "pending", "shipped"], selected: invoice_item.status %>
+        <%= f.button "Update Item Status"%>
+      <% end %>
+    </div>
+  <% end %>
+</ul>
+</section>
+
+<section class="total_revenue">
+  <p> Total Revenue: <%= @invoice.total_revenue %></p>
+</section>

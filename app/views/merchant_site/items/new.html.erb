@@ -1,0 +1,24 @@
+<h1> New Item </h1>
+
+<%= form_with url: merchant_items_path(@merchant), method: :post, data: {turbo: false} do |form| %>
+
+    <%= form.label :name, "Item Name:" %> <br>
+    <%= form.text_field :name %> <br>
+
+    <br>
+
+    <%= form.label :description, "Item Description:" %> <br>
+    <%= form.text_field :description %> <br>
+
+    <br>
+
+    <%= form.label :unit_price, "Item Selling Price (in cents):" %> <br>
+    <%= form.text_field :unit_price %> <br>
+
+    <%= form.hidden_field :status, value: "disabled" %>
+
+    <br>
+
+    <%= form.submit "Create Item" %>  
+
+<% end %>

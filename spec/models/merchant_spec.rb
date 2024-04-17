@@ -1,14 +1,14 @@
 require "rails_helper"
 
 RSpec.describe Merchant, type: :model do
-  # describe 'validations' do
-  #   xit { should validate_presence_of :}
-  # end
+  describe "model relationships" do
+    it { should have_many(:items) }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:transactions).through(:invoices) }
+    it { should have_many(:customers).through(:invoices) }
+  end
 
-  # describe 'relationships' do
-  #   it {should belong_to :}
-  #   it {should have_many :}
-  # end
   describe "instance methods" do
     before(:each) do
       @merchant = create(:merchant)
@@ -47,6 +47,12 @@ RSpec.describe Merchant, type: :model do
 
     it "#ready_to_ship_items" do
       expect(@merchant.ready_to_ship_items).to eq(@invoice_item_list)
+    end
+
+    xit "#unique_invoices" do
+    end
+
+    xit "#top_five_items" do
     end
   end
 
