@@ -4,9 +4,7 @@ RSpec.describe "Create new merchant" do
   it "has a form to add a new merchant" do
     visit "/admin/merchants/new"
 
-    # Question - check whether it is okay to use find_css for finding elements
-    expect(page).to have_css("form")
-    within(find("form")) do
+    within("form") do
       expect(page).to have_field("name")
       expect(page).to have_css('input[type="submit"]')
     end
