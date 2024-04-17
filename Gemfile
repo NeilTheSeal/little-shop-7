@@ -58,12 +58,8 @@ group :development, :test do
   gem "orderly"
   gem "pry"
   gem "rspec-rails"
-  gem "rubocop"
-  gem "rubocop-discourse"
   gem "shoulda-matchers"
   gem "simplecov"
-  gem "solargraph"
-  gem "standard"
 end
 
 group :development do

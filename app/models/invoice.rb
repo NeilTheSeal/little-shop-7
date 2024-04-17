@@ -18,4 +18,11 @@ class Invoice < ApplicationRecord
   def total_revenue
     self.invoice_items.sum("unit_price * quantity")
   end
+
+  def total_revenue
+    invoice_items.select(
+      "SUM(invoice_items.quantity * invoice_items.unit_price)" \
+      " AS total_revenue, invoice_items.invoice_id"
+    ).group("invoice_items.invoice_id")[0].total_revenue
+  end
 end

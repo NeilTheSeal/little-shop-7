@@ -32,13 +32,13 @@ Rails.application.routes.draw do
     resources(
       :merchants,
       controller: "merchants",
-      only: %i[index show edit update]
+      only: %i[index show edit update create new]
     )
 
     resources(
       :invoices,
       controller: "invoices",
-      only: %i[index show]
+      only: %i[index show update]
     )
   end
 end

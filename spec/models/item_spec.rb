@@ -34,17 +34,35 @@ RSpec.describe Item do
   end
 
   describe "instance methods" do
+    it "#formatted_unit_price" do
+      @merchant = Merchant.create!(name: "Sally's Bakery")
+      @cookie = Item.create!(
+        name: "Cookie",
+        description: "It's a good cookie.",
+        unit_price: 251,
+        merchant_id: @merchant.id
+      )
+      expect(@cookie.formatted_unit_price).to eq("$2.51")
+    end
+
     it "#top_selling_date" do
       merchant = create(:merchant)
       item = create(:item, unit_price: 1000, merchant:)
       customer = create(:customer)
-      invoice1 = create(:invoice, customer:, created_at: "2020-01-01 00:00:00")
-      invoice2 = create(:invoice, customer:, created_at: "2020-01-01 05:00:00")
-      invoice3 = create(:invoice, customer:, created_at: "2020-01-02 00:00:00")
-      invoice4 = create(:invoice, customer:, created_at: "2020-01-03 00:00:00")
-      invoice5 = create(:invoice, customer:, created_at: "2020-01-03 02:00:00")
-      invoice6 = create(:invoice, customer:, created_at: "2020-01-04 00:00:00")
-      invoice7 = create(:invoice, customer:, created_at: "2020-01-04 02:00:00")
+      invoice1 = create(:invoice, customer:,
+                                  created_at: "2020-01-01 00:00:00")
+      invoice2 = create(:invoice, customer:,
+                                  created_at: "2020-01-01 05:00:00")
+      invoice3 = create(:invoice, customer:,
+                                  created_at: "2020-01-02 00:00:00")
+      invoice4 = create(:invoice, customer:,
+                                  created_at: "2020-01-03 00:00:00")
+      invoice5 = create(:invoice, customer:,
+                                  created_at: "2020-01-03 02:00:00")
+      invoice6 = create(:invoice, customer:,
+                                  created_at: "2020-01-04 00:00:00")
+      invoice7 = create(:invoice, customer:,
+                                  created_at: "2020-01-04 02:00:00")
 
       invoice_item1 = create(
         :invoice_item,
@@ -95,22 +113,20 @@ RSpec.describe Item do
         unit_price: item.unit_price,
         quantity: 2
       )
-      transaction1 = create(:transaction, invoice: invoice1, result: "success")
-      transaction2 = create(:transaction, invoice: invoice2, result: "success")
-      transaction3 = create(:transaction, invoice: invoice3, result: "success")
-      transaction4 = create(:transaction, invoice: invoice4, result: "success")
-      transaction5 = create(:transaction, invoice: invoice5, result: "success")
+      transaction1 = create(:transaction, invoice: invoice1,
+                                          result: "success")
+      transaction2 = create(:transaction, invoice: invoice2,
+                                          result: "success")
+      transaction3 = create(:transaction, invoice: invoice3,
+                                          result: "success")
+      transaction4 = create(:transaction, invoice: invoice4,
+                                          result: "success")
+      transaction5 = create(:transaction, invoice: invoice5,
+                                          result: "success")
       transaction6 = create(:transaction, invoice: invoice6, result: "failed")
       transaction7 = create(:transaction, invoice: invoice7, result: "failed")
 
       expect(item.top_selling_date).to eq("Friday, January 03, 2020")
-    end
-
-    it "#formatted_unit_price" do
-      @merchant = Merchant.create!(name: "Sally's Bakery")
-      @cookie = Item.create!(name: "Cookie",
-                             description: "It's a good cookie.", unit_price: 251, merchant_id: @merchant.id)
-      expect(@cookie.formatted_unit_price).to eq("$2.51")
     end
 
     xit "#formatted_ivi_revenue_price" do

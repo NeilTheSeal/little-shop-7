@@ -1,5 +1,7 @@
 <%= render partial: "admin_site/admin_navbar" %>
 
+<%= link_to("New Merchant", "/admin/merchants/new", class: "new-merchant-link") %>
+
 <div class="page-content">
   
   <div class="content-column">
@@ -37,8 +39,16 @@
   </div>
 
   <div class="content-column">
-    <div class="content-header">We Dunno Yet</div>
-
+    <div class="content-header">Top Merchants</div>
+    <ol class="content-ordered-list" id="top-merchants">
+      <% @top_merchants.each do |merchant| %>
+        <li class="ordered-list-item">
+          <%= link_to merchant.merchant_name, admin_site_merchant_path(merchant) %>
+          <div class="revenue">Total sales: $<%= number_with_delimiter(merchant.total_revenue / 100, :delimiter => ',') %></div>
+          <div class="revenue">Date with the highest revenue: <br>&nbsp;&nbsp;<%= merchant.date_of_most_revenue %></div>
+        </li>
+      <% end %>
+    </ol>
   </div>
 
 </div>

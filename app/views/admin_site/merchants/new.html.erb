@@ -1,0 +1,8 @@
+<%= render partial: "admin_site/admin_navbar" %>
+
+<%= form_with url: "/admin/merchants", method: :post, class: "new-merchants-form" do |form| %>
+  <%= form.label :name, "Merchant Name: " %>
+  <%= form.text_field :name %>
+  <%= form.hidden_field :status, value: "disabled" %>
+  <%= form.submit "create merchant" %>
+<% end %>

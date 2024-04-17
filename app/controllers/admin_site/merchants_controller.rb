@@ -2,6 +2,7 @@ module AdminSite
   class MerchantsController < ApplicationController
     def index
       @merchants = Merchant.order(:id)
+      @top_merchants = Merchant.top_five_merchants
     end
 
     def show
@@ -28,7 +29,24 @@ module AdminSite
       end
     end
 
+    def new
+    end
+
+    def create
+      merchant = Merchant.new(merchant_new_params)
+      if merchant.save
+        redirect_to("/admin/merchants")
+      else
+        redirect_to("/admin/merchants/new")
+        flash[:alert] = "Error: #{merchant.errors.full_messages}"
+      end
+    end
+
     private
+
+    def merchant_new_params
+      params.permit(:name, :status)
+    end
 
     def merchant_update_params
       params.permit(:name, :status)
