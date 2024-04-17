@@ -16,7 +16,7 @@ On the Merchant side, the other pair built out a dashboard for the merchants tha
 
 ### Ideas for a Contributor to Work on / Refactor
 
-There are a lot of things that future contributors could work on if they wanted to. The Merchant side of things could use a little bit more styling for one, but we think it would be cool to add pictures for all the items and display them in a nice frontend for customers.
+There are a lot of things that future contributors could work on if they wanted to. The Merchant side of things could use a little bit more styling for one, but we think it would be cool to add pictures for all the items and display them in a nice frontend for customers. Possible refactor could include building out a shopping cart, that costumers can add items to it.
 
 
 * Neil Hendren | [Neil's GitHub](https://github.com/NeilTheSeal)
