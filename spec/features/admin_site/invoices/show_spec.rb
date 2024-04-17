@@ -17,15 +17,17 @@ RSpec.describe "Admin Index Show Page" do
       :invoice_item,
       item: @item1,
       invoice: @invoice,
-      quantity: 2,
-      unit_price: @item1.unit_price
+      quantity: 1,
+      unit_price: @item1.unit_price,
+      status: "pending"
     )
     create(
       :invoice_item,
       item: @item2,
       invoice: @invoice,
       quantity: 2,
-      unit_price: @item2.unit_price
+      unit_price: @item2.unit_price,
+      status: "packaged"
     )
 
     create(:transaction, invoice: @invoice)
@@ -38,5 +40,21 @@ RSpec.describe "Admin Index Show Page" do
     expect(page).to have_content("Status: completed")
     expect(page).to have_content("Created At: Saturday, January 01, 2022")
     expect(page).to have_content("Customer Name: #{@customer.first_name} #{@customer.last_name}")
+  end
+
+  it "shows all items on the invoice and all invoice item information" do
+    visit "/admin/invoices/#{@invoice.id}"
+
+    within "#invoice-items" do
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content("Quantity: 2")
+      expect(page).to have_content("Unit Price: $10.00")
+      expect(page).to have_content("Status: pending")
+
+      expect(page).to have_content(@item2.name)
+      expect(page).to have_content("Quantity: 1")
+      expect(page).to have_content("Unit Price: $20.00")
+      expect(page).to have_content("Status: packaged")
+    end
   end
 end
