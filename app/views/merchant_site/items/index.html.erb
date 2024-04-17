@@ -6,8 +6,9 @@
   <h3> Top Five Selling Items </h3>
     <ul>
       <% @merchant.top_five_items.each do |item| %>
-        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> | <%= item.formatted_ivi_revenue_price %> | <%= item.formatted_created_at %> </li>
-        <p> Top Selling Date for Item: <%= item %> </p>
+        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> | <%= item.formatted_ivi_revenue_price %> </li>
+
+        <p> Top Selling Date for Item: <%= item.created_at %> </p>
       <% end %>
     </ul>
 <section>

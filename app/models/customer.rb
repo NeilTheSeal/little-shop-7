@@ -6,14 +6,12 @@ class Customer < ApplicationRecord
   has_many :merchants, through: :items
 
   def self.top_customers
-    Customer.select(
-      "customers.first_name, customers.last_name, customers.id," \
-      "COUNT(customers.id) AS transaction_count"
-    )
-            .joins(:transactions)
-            .where("transactions.result = 1")
-            .group("customers.id")
-            .order("COUNT(customers.id) DESC")
-            .limit(5)
+    self
+      .select("customers.first_name, customers.last_name, customers.id, COUNT(customers.id) AS transaction_count")
+      .joins(:transactions)
+      .where("transactions.result = 1")
+      .group("customers.id")
+      .order("COUNT(customers.id) DESC")
+      .limit(5)
   end
 end
