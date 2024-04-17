@@ -40,6 +40,7 @@ RSpec.describe "Admin Index Show Page" do
     expect(page).to have_content("Status: completed")
     expect(page).to have_content("Created At: Saturday, January 01, 2022")
     expect(page).to have_content("Customer Name: #{@customer.first_name} #{@customer.last_name}")
+    expect(page).to have_content("Total Revenue: $50.00")
   end
 
   it "shows all items on the invoice and all invoice item information" do
