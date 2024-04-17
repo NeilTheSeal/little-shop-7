@@ -10,7 +10,7 @@ RSpec.describe "Admin Index Show Page" do
     @invoice = create(
       :invoice,
       customer: @customer,
-      status: "completed",
+      status: "in progress",
       created_at: "2022-01-01 00:00:00"
     )
     create(
@@ -37,7 +37,7 @@ RSpec.describe "Admin Index Show Page" do
     visit "/admin/invoices/#{@invoice.id}"
 
     expect(page).to have_content("Invoice ##{@invoice.id}")
-    expect(page).to have_content("Status: completed")
+    expect(page).to have_content("Status: ")
     expect(page).to have_content("Created At: Saturday, January 01, 2022")
     expect(page).to have_content("Customer Name: #{@customer.first_name} #{@customer.last_name}")
     expect(page).to have_content("Total Revenue: $50.00")
@@ -57,5 +57,33 @@ RSpec.describe "Admin Index Show Page" do
       expect(page).to have_content("Unit Price: $20.00")
       expect(page).to have_content("Status: packaged")
     end
+  end
+
+  it "has a form to update invoice status" do
+    visit "/admin/invoices/#{@invoice.id}"
+
+    within("form") do
+      expect(page).to have_select(
+        "status",
+        selected: "in progress",
+        options: ["cancelled", "in progress", "completed"]
+      )
+      expect(page).to have_button("update")
+    end
+  end
+
+  it "can update the status of an invoice" do
+    visit "/admin/invoices/#{@invoice.id}"
+
+    select "completed", from: "status"
+    click_button("update")
+
+    expect(page).to have_current_path("/admin/invoices/#{@invoice.id}")
+
+    expect(page).to have_select(
+      "status",
+      selected: "completed",
+      options: ["cancelled", "in progress", "completed"]
+    )
   end
 end
