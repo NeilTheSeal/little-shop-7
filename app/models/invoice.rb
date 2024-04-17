@@ -15,9 +15,9 @@ class Invoice < ApplicationRecord
       .order(:created_at)
   end
 
-  def total_revenue
-    self.invoice_items.sum("unit_price * quantity")
-  end
+  # def total_revenue
+  #   self.invoice_items.sum("unit_price * quantity")
+  # end
 
   def total_revenue
     invoice_items.select(

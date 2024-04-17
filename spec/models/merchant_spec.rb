@@ -49,10 +49,12 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant.ready_to_ship_items).to eq(@invoice_item_list)
     end
 
-    xit "#unique_invoices" do
+    it "#unique_invoices" do
+      expect(@merchant.unique_invoices).to eq(@merchant.invoices.distinct)
     end
 
     xit "#top_five_items" do
+      expect(@merchant.top_five_items).to eq(@item_list)
     end
   end
 
