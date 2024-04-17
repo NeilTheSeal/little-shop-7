@@ -27,8 +27,12 @@ RSpec.describe Merchant, type: :model do
 
       @invoice_item_list = []
       @item_list.each_with_index do |item, index|
-        @invoice_item_list << create(:invoice_item, item:,
-                                                    invoice: @invoice_list[index], unit_price: item.unit_price)
+        @invoice_item_list << create(
+          :invoice_item,
+          item:,
+          invoice: @invoice_list[index],
+          unit_price: item.unit_price
+        )
       end
       @transaction_list = []
       @invoice_list.each_with_index do |invoice, index|
@@ -52,9 +56,66 @@ RSpec.describe Merchant, type: :model do
     it "#unique_invoices" do
       expect(@merchant.unique_invoices).to eq(@merchant.invoices.distinct)
     end
+  end
 
-    xit "#top_five_items" do
-      expect(@merchant.top_five_items).to eq(@item_list)
+  describe "more instance methods" do
+    it "#top_five_items" do
+      merchant = create(:merchant)
+      items = create_list(:item, 6, merchant:, unit_price: 1000)
+      customer = create(:customer)
+      invoice = create(:invoice, customer:)
+      invoice_item1 = create(
+        :invoice_item,
+        item: items[0],
+        invoice:,
+        unit_price: items[0].unit_price,
+        quantity: 3
+      )
+      invoice_item2 = create(
+        :invoice_item,
+        item: items[1],
+        invoice:,
+        unit_price: items[1].unit_price,
+        quantity: 1
+      )
+      invoice_item3 = create(
+        :invoice_item,
+        item: items[2],
+        invoice:,
+        unit_price: items[2].unit_price,
+        quantity: 2
+      )
+      invoice_item4 = create(
+        :invoice_item,
+        item: items[3],
+        invoice:,
+        unit_price: items[3].unit_price,
+        quantity: 5
+      )
+      invoice_item5 = create(
+        :invoice_item,
+        item: items[4],
+        invoice:,
+        unit_price: items[4].unit_price,
+        quantity: 6
+      )
+      invoice_item6 = create(
+        :invoice_item,
+        item: items[5],
+        invoice:,
+        unit_price: items[5].unit_price,
+        quantity: 4
+      )
+
+      create(:transaction, invoice:)
+
+      expect(merchant.top_five_items).to eq([
+        items[4],
+        items[3],
+        items[5],
+        items[0],
+        items[2]
+      ])
     end
   end
 
