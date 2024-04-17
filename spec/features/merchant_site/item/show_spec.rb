@@ -41,14 +41,18 @@ RSpec.describe 'Merchant_items#show', type: :feature do
   it 'merchant item show page lists name, description, and selling price' do
     # As a merchant, when I click on the name of an item from the merchant items index page, (merchants/:merchant_id/items)
     visit merchant_items_path(@merchant)
-    click_link "#{@item_list[0].name}"
+    save_and_open_page
+    within ".top_5_items" do
+      click_link @item_list[0].name      
+    end
+
     # save_and_open_page
     # Then I am taken to that merchant's item's show page (/merchants/:merchant_id/items/:item_id)
     expect(current_path).to eq(merchant_item_path(@merchant, @item_list[0]))  
     # And I see all of the item's attributes including:
     within ".item_attributes" do
       # Name
-      expect(page).to have_content("#{@item_list[0].name}")
+      expect(page).to have_content(@item_list[0].name)
       # Description
       expect(page).to have_content("Description: #{@item_list[0].description}")
       # Current Selling Price 

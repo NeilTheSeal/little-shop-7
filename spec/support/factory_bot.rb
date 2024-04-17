@@ -11,7 +11,7 @@ FactoryBot.define do
   end
 
   factory :merchant, class: Merchant do
-    name { Faker::Cannabis.brand + rand(0..99).to_s }
+    name { Faker::Cannabis.brand + rand(0..99999).to_s + rand(0..99999).to_s}
     status { 0 }
   end
 
@@ -20,7 +20,7 @@ FactoryBot.define do
   end
 
   factory :item, class: Item do
-    name { Faker::Food.dish + rand(0..99).to_s }
+    name { Faker::Food.dish + rand(0..99999).to_s + rand(0..99999).to_s }
     description { Faker::Hipster.paragraph(sentence_count: 2) }
     unit_price { rand(500..10_000) }
     status { 0 }

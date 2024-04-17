@@ -13,23 +13,23 @@ RSpec.describe Item do
     it "#enabled_items" do
       @merchant = Merchant.create!(name: "Sally's Bakery")
       @cookie = Item.create!(name: "Cookie",
-                             description: "It's a good cookie.", unit_price: 251, merchant_id: @merchant.id, status: 0)
+                             description: "It's a good cookie.", unit_price: 251, merchant_id: @merchant.id, status: "enabled")
       @shake = Item.create!(name: "Shake", description: "It's a good shake.",
-                            unit_price: 951, merchant_id: @merchant.id, status: 1)
+                            unit_price: 951, merchant_id: @merchant.id, status: "enabled")
       @candy = Item.create!(name: "Candy", description: "It's a good candy.",
-                            unit_price: 1151, merchant_id: @merchant.id, status: 0)
-      expect(Item.enabled_items).to eq([@cookie, @candy])
+                            unit_price: 1151, merchant_id: @merchant.id, status: "disabled")
+      expect(Item.enabled_items).to eq([@cookie, @shake])
     end
 
     it "#disabled_items" do
       @merchant = Merchant.create!(name: "Sally's Bakery")
       @cookie = Item.create!(name: "Cookie",
-                             description: "It's a good cookie.", unit_price: 251, merchant_id: @merchant.id, status: 1)
+                             description: "It's a good cookie.", unit_price: 251, merchant_id: @merchant.id, status: "disabled")
       @shake = Item.create!(name: "Shake", description: "It's a good shake.",
-                            unit_price: 951, merchant_id: @merchant.id, status: 1)
+                            unit_price: 951, merchant_id: @merchant.id, status: "enabled")
       @candy = Item.create!(name: "Candy", description: "It's a good candy.",
-                            unit_price: 1151, merchant_id: @merchant.id, status: 0)
-      expect(Item.disabled_items).to eq([@cookie, @shake])
+                            unit_price: 1151, merchant_id: @merchant.id, status: "disabled")
+      expect(Item.disabled_items).to eq([@cookie, @candy])
     end
   end
 
@@ -129,16 +129,16 @@ RSpec.describe Item do
       expect(item.top_selling_date).to eq("Friday, January 03, 2020")
     end
 
-    xit "#formatted_ivi_revenue_price" do
-      @merchant = Merchant.create!(name: "Sally's Bakery")
-      @customer = Customer.create!(first_name: "Jared", last_name: "Hobson")
-      @cookie = Item.create!(name: "Cookie",
-                             description: "It's a good cookie.", unit_price: 251, merchant_id: @merchant.id)
-      @invoice = Invoice.create!(customer_id: @customer.id, status: 1)
-      @new_ivi = InvoiceItem.create!(item_id: @cookie.id,
-                                     invoice_id: @invoice.id, quantity: 24, unit_price: 12_314, status: 0)
-      expect(@cookie.formatted_ivi_revenue_price).to eq("asdasdasdasd")
-    end
+    # xit "#formatted_ivi_revenue_price" do
+    #   @merchant = Merchant.create!(name: "Sally's Bakery")
+    #   @customer = Customer.create!(first_name: "Jared", last_name: "Hobson")
+    #   @cookie = Item.create!(name: "Cookie",
+    #                          description: "It's a good cookie.", unit_price: 251, merchant_id: @merchant.id)
+    #   @invoice = Invoice.create!(customer_id: @customer.id, status: 1)
+    #   @new_ivi = InvoiceItem.create!(item_id: @cookie.id,
+    #                                  invoice_id: @invoice.id, quantity: 24, unit_price: 12_314, status: 0)
+    #   expect(@cookie.formatted_ivi_revenue_price).to eq("asdasdasdasd")
+    # end
 
     it "#formatted_created_at" do
       @merchant = Merchant.create!(name: "Sally's Bakery")
