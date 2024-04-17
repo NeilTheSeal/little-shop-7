@@ -12,10 +12,18 @@
 <section class="invoice_item_info">
 <ul>
   <% @invoice.invoice_items.each do |invoice_item| %>
-    <li> <h3><%= invoice_item.item.name %></h3> </li>
-    <p> Quantity: <%= invoice_item.quantity %></p>
-    <p> Price: <%= invoice_item.formatted_unit_price_invoice_item %></p>
-    <p> Status: <%= invoice_item.status %></p>
+    <div id="invoice_item-<%= invoice_item.id %>">
+      <li> <h3><%= invoice_item.item.name %></h3> </li>
+      <p> Quantity: <%= invoice_item.quantity %></p>
+      <p> Price: <%= invoice_item.formatted_unit_price_invoice_item %></p>
+      <p> Status: <%= invoice_item.status %></p>
+
+      <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, data: {turbo: false}, local: true do |f| %>
+        <%= f.hidden_field :ivi, :value => invoice_item.id %>
+        <%= f.select :status, ["packaged", "pending", "shipped"], selected: invoice_item.status %>
+        <%= f.button "Update Item Status"%>
+      <% end %>
+    </div>
   <% end %>
 </ul>
 </section>
