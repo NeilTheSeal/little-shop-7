@@ -24,6 +24,5 @@ RSpec.describe InvoiceItem do
       @invoice_item = InvoiceItem.create!(item_id: @cookie.id, invoice_id: @invoice.id, quantity: 1, unit_price: 9, status: 0, created_at: "2012-03-27 14:54:09", updated_at: "2012-03-27 14:54:09")
       expect(@invoice_item.formatted_unit_price_invoice_item).to eq("$0.09")
     end
-
   end
 end
