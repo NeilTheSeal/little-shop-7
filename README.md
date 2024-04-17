@@ -1,5 +1,7 @@
 # Little Esty Shop
 
+Hola!
+
 ### Description of Project
 
 ### Summary of Work Completed

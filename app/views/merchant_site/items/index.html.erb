@@ -1,16 +1,48 @@
 <h1> Merchant: <%= @merchant.name %> Items </h1>
 
-<section class="name_of_items">
-  <ul>
-    <% @merchant.items.order(:id).each do |item| %>
-      <div id="item_block_<%= item.id %>">
-        <li>
-          <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %> </p>
-          <p><%= item.status %></p>
-          <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {status: "enabled"} %> 
-          <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {status: "disabled"} %>
-        </li>       
-      </div>
-    <% end %>
-  </ul>
+<%= link_to "New Item", new_merchant_item_path(@merchant), method: :get %>
+
+<section class="top_5_items">
+  <h3> Top Five Selling Items </h3>
+    <ul>
+      <% @merchant.top_five_items.each do |item| %>
+        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> | <%= item.formatted_ivi_revenue_price %> </li>
+
+        <p> Top Selling Date for Item: <%= item.created_at %> </p>
+      <% end %>
+    </ul>
+<section>
+
+<section class="disabled_items">
+  <h2>Disabled Items:</h2>
+  <section class="name_of_items">
+    <ul>
+      <% @items.disabled_items.each do |item| %>
+        <div id="disabled-<%= item.id %>">
+          <li>
+            <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> </p>
+            <p>Status: <%= item.status %></p>
+            <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {status: "enabled"} %> 
+          </li>       
+        </div>
+      <% end %>
+    </ul>
+  </section>
+</section>
+
+<section class="enabled_items">
+  <h2>Enabled Items:</h2>
+  <section class="name_of_items">
+    <ul>
+      <% @items.enabled_items.each do |item| %>
+        <div id="enabled_<%= item.id %>">
+          <li>
+            <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> </p>
+            <p>Status: <%= item.status %></p>
+            <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {status: "disabled"} %>
+          </li>       
+        </div>
+      <% end %>
+    </ul>
+  </section>
 </section>
