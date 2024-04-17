@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources(
       :invoices,
       controller: "invoices",
-      only: %i[index show]
+      only: %i[index show update]
     )
   end
 end

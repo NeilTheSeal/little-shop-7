@@ -3,7 +3,14 @@
 <div class="full-width-content">
   <div class="full-width-header">Invoice #<%= @invoice.id %></div>
   <div class="info-box">
-    <div class="info-box-item">Status: <%= @invoice.status %></div>
+    <div class="info-box-item">
+      <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, class: "select-status-form" do |form| %>
+        <%= form.label :status, "Status: " %>
+        <%= form.select :status, ["cancelled", "in progress", "completed"], selected: @invoice.status %>
+        <%= form.hidden_field :customer_id, value: @invoice.customer_id %>
+        <%= form.submit "update" %>
+      <% end %>
+    </div>
     <div class="info-box-item">Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></div>
     <div class="info-box-item"><%= "Customer Name: #{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></div>
     <div class="info-box-item">Total Revenue: $<%= number_with_precision(@invoice.total_revenue / 100, :precision => 2, :delimiter => ',') %></div>

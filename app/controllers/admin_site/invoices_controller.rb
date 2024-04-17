@@ -1,11 +1,23 @@
 module AdminSite
   class InvoicesController < ApplicationController
     def index
-      @invoices = Invoice.all
+      @invoices = Invoice.all.order(:id)
     end
 
     def show
       @invoice = Invoice.find(params[:id])
+    end
+
+    def update
+      invoice = Invoice.find(params[:id])
+      invoice.update(invoice_params)
+      redirect_to("/admin/invoices/#{invoice.id}")
+    end
+
+    private
+
+    def invoice_params
+      params.permit(:id, :customer_id, :status)
     end
   end
 end
