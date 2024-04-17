@@ -6,6 +6,7 @@
     <div class="info-box-item">Status: <%= @invoice.status %></div>
     <div class="info-box-item">Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></div>
     <div class="info-box-item"><%= "Customer Name: #{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></div>
+    <div class="info-box-item">Total Revenue: $<%= number_with_precision(@invoice.total_revenue / 100, :precision => 2, :delimiter => ',') %></div>
   </div>
   <div class="full-width-header">Items On This Invoice</div>
   <ol class="content-ordered-list" id="invoice-items">
