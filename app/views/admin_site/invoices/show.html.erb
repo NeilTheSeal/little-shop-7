@@ -7,4 +7,15 @@
     <div class="info-box-item">Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></div>
     <div class="info-box-item"><%= "Customer Name: #{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></div>
   </div>
+  <div class="full-width-header">Items On This Invoice</div>
+  <ol class="content-ordered-list" id="invoice-items">
+    <% @invoice.invoice_items.each do |invoice_item| %>
+      <li class="ordered-list-item" id="item-<%= invoice_item.id %>">
+        <div class="ordered-list-item-header"><%= invoice_item.item.name %></div>
+        <div class="ordered-list-item-info">Quantity: <%= invoice_item.quantity %></div>
+        <div class="ordered-list-item-info">Unit Price: $<%= number_with_precision(invoice_item.unit_price / 100, :precision => 2, :delimiter => ',') %></div>
+        <div class="ordered-list-item-info">Status: <%= invoice_item.status %></div>
+      </li>
+    <% end %>
+  </ol>
 </div>
