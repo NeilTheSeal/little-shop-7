@@ -9,6 +9,13 @@ RSpec.describe Item do
     it { should have_many(:customers).through(:invoices) }
   end
 
+  describe "validations" do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:description) }
+    it { should validate_presence_of(:unit_price) }
+    it { should validate_presence_of(:status) }
+  end
+
   describe "class methods" do
     before(:each) do
       @merchant = Merchant.create!(name: "Sally's Bakery")
@@ -62,6 +69,7 @@ RSpec.describe Item do
         name: "Cookie",
         description: "It's a good cookie.",
         unit_price: 251,
+        status: 0,
         merchant_id: merchant.id
       )
       expect(cookie.formatted_unit_price).to eq("$2.51")
@@ -208,6 +216,7 @@ RSpec.describe Item do
           description: "It's a good cookie.",
           unit_price: 251,
           merchant_id: @merchant.id,
+          status: 0,
           created_at: "2024-04-17 00:00:00"
         )
         @invoice = Invoice.create!(

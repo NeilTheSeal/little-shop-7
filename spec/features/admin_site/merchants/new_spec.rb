@@ -13,6 +13,12 @@ RSpec.describe "Create new merchant" do
   it "can create a new merchant" do
     visit "/admin/merchants/new"
 
+    fill_in("name", with: "")
+    click_button("create")
+
+    expect(page).to have_current_path("/admin/merchants/new")
+    expect(page).to have_content("Error: ")
+
     fill_in("name", with: "Stonks Corp")
     click_button("create")
 

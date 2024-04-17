@@ -6,6 +6,12 @@ RSpec.describe InvoiceItem do
     it { should belong_to(:invoice) }
   end
 
+  describe "validations" do
+    it { should validate_presence_of(:quantity) }
+    it { should validate_presence_of(:unit_price) }
+    it { should validate_presence_of(:status) }
+  end
+
   describe "instance methods" do
     before(:each) do
       @customer = Customer.create!(
@@ -21,6 +27,7 @@ RSpec.describe InvoiceItem do
         name: "Cookie",
         description: "It's a good cookie.",
         unit_price: 251,
+        status: 0,
         merchant_id: @merchant.id
       )
 

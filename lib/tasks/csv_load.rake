@@ -1,5 +1,14 @@
 require "csv"
 
+task clear_table: [:environment] do
+  Transaction.destroy_all
+  InvoiceItem.destroy_all
+  Item.destroy_all
+  Invoice.destroy_all
+  Merchant.destroy_all
+  Customer.destroy_all
+end
+
 namespace :csv_load do
   task customers: [:environment] do
     print "."
@@ -8,6 +17,7 @@ namespace :csv_load do
     CSV.foreach(file_path, headers: true) do |row|
       Customer.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!("customers")
   end
 
   task merchants: [:environment] do
@@ -18,6 +28,7 @@ namespace :csv_load do
       row[:status] = 0
       Merchant.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!("merchants")
   end
 
   task invoices: [:environment] do
@@ -27,7 +38,7 @@ namespace :csv_load do
     CSV.foreach(file_path, headers: true) do |row|
       Invoice.create!(row.to_hash)
     end
-    ActiveRecord::Base.connection.reset_pk_sequence!("invoice")
+    ActiveRecord::Base.connection.reset_pk_sequence!("invoices")
   end
 
   task items: [:environment] do
