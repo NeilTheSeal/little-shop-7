@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
-  enum status: ["enabled", "disabled"]
+  enum status: %w[enabled disabled]
 
   def self.enabled_items
     where(status: :enabled)
@@ -15,15 +15,17 @@ class Item < ApplicationRecord
     where(status: :disabled)
   end
 
-  # def top_selling_date
-  #   self
-  #     .select("invoices.id as invoice_id, count(items.name) as count, invoices.created_at AS created_at")
-  #     .joins(:transactions)
-  #     .where("transactions.result = '1'")
-  #     .group("invoices.id, invoices.created_at")
-  #     .order("items.name, count DESC, invoices.created DESC")
-  #     .limit(1)
-  # end
+  def top_selling_date
+    invoice_items.joins(invoice: :transactions)
+                 .where("transactions.result = '1'")
+                 .select(
+                   "DATE_TRUNC('day', invoices.created_at) AS invoice_date," \
+                   " SUM(invoice_items.quantity) AS total_sold"
+                 ).group("DATE_TRUNC('day',invoices.created_at)")
+                 .order("total_sold DESC, invoice_date DESC")
+                 .limit(1)[0]
+                 .invoice_date.strftime("%A, %B %d, %Y")
+  end
 
   def formatted_unit_price
     "$#{unit_price.to_f / 100}"
