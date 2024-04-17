@@ -8,7 +8,7 @@
       <% @merchant.top_five_items.each do |item| %>
         <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item), method: :get %> | <%= item.formatted_ivi_revenue_price %> </li>
 
-        <p> Top Selling Date for Item: <%= item.created_at %> </p>
+        <p> Top Selling Date for Item: <%= item.top_selling_date %> </p>
       <% end %>
     </ul>
 <section>
