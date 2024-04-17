@@ -9,7 +9,9 @@ RSpec.describe "Merchant_items#show", type: :feature do
   it "merchant item show page lists name, description, and selling price" do
     visit merchant_items_path(@merchant)
 
-    click_link @item_list[0].name
+    within ".top_5_items" do
+      click_link @item_list[0].name
+    end
     expect(current_path).to eq(merchant_item_path(@merchant, @item_list[0]))
 
     within ".item_attributes" do

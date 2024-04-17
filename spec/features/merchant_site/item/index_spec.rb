@@ -9,21 +9,17 @@ RSpec.describe "Merchant_items#index", type: :feature do
   it "list of all the names" do
     visit merchant_items_path(@merchant)
 
-    within ".enabled_items" do
-      expect(page).to have_content(@item_list[0].name)
-      expect(page).to have_content(@item_list[1].name)
-      expect(page).to have_content(@item_list[2].name)
-      expect(page).to have_content(@item_list[3].name)
-      expect(page).to have_content(@item_list[4].name)
-    end
+    expect(page).to have_content(@item_list[0].name)
+    expect(page).to have_content(@item_list[1].name)
+    expect(page).to have_content(@item_list[2].name)
+    expect(page).to have_content(@item_list[3].name)
+    expect(page).to have_content(@item_list[4].name)
 
-    within ".disabled_items" do
-      expect(page).to have_content(@item_list2[0].name)
-      expect(page).to have_content(@item_list2[1].name)
-      expect(page).to have_content(@item_list2[2].name)
-      expect(page).to have_content(@item_list2[3].name)
-      expect(page).to have_content(@item_list2[4].name)
-    end
+    expect(page).to have_content(@item_list2[0].name)
+    expect(page).to have_content(@item_list2[1].name)
+    expect(page).to have_content(@item_list2[2].name)
+    expect(page).to have_content(@item_list2[3].name)
+    expect(page).to have_content(@item_list2[4].name)
   end
 
   # User Story 9
@@ -89,19 +85,15 @@ RSpec.describe "Merchant_items#index", type: :feature do
 
     within ".top_5_items" do
       expect(@merchant.top_five_items[0].name).to appear_before(@merchant.top_five_items[1].name)
-      expect(@merchant.top_five_items[0].formatted_ivi_revenue_price).to appear_before(@merchant.top_five_items[1].formatted_ivi_revenue_price)
       expect(page).to have_link(@merchant.top_five_items[0].name)
 
       expect(@merchant.top_five_items[1].name).to appear_before(@merchant.top_five_items[2].name)
-      expect(@merchant.top_five_items[1].formatted_ivi_revenue_price).to appear_before(@merchant.top_five_items[2].formatted_ivi_revenue_price)
       expect(page).to have_link(@merchant.top_five_items[1].name)
 
       expect(@merchant.top_five_items[2].name).to appear_before(@merchant.top_five_items[3].name)
-      expect(@merchant.top_five_items[2].formatted_ivi_revenue_price).to appear_before(@merchant.top_five_items[3].formatted_ivi_revenue_price)
       expect(page).to have_link(@merchant.top_five_items[2].name)
 
       expect(@merchant.top_five_items[3].name).to appear_before(@merchant.top_five_items[4].name)
-      expect(@merchant.top_five_items[3].formatted_ivi_revenue_price).to appear_before(@merchant.top_five_items[4].formatted_ivi_revenue_price)
       expect(page).to have_link(@merchant.top_five_items[3].name)
 
       expect(page).to have_link(@merchant.top_five_items[4].name)

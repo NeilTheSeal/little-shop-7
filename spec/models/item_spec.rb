@@ -223,10 +223,6 @@ RSpec.describe Item do
         )
       end
 
-      xit "#formatted_ivi_revenue_price" do
-        expect(@cookie.formatted_ivi_revenue_price).to eq("asdasdasdasd")
-      end
-
       it "#formatted_created_at" do
         expect(@cookie.formatted_created_at).to eq("Wednesday, April 17, 2024")
       end
