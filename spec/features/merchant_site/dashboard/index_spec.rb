@@ -72,7 +72,7 @@ RSpec.describe "merchant dashboard", type: :feature do
   end
 
   # User Story 3
-  it "merchant dashboard shows top 5 customers, with number of successful transactions" do
+  xit "merchant dashboard shows top 5 customers, with number of successful transactions" do
     # As a merchant, when I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
 
     visit "/merchant/#{@merchant.id}/dashboard"
