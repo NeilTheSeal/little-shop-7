@@ -264,7 +264,6 @@ RSpec.describe "Merchant dashboard" do
 
     it "shows the top 5 merchants" do
       visit "/admin/merchants"
-      save_and_open_page
 
       within "#top-merchants" do
         expect(@merchants[5].name).to appear_before(@merchants[4].name)

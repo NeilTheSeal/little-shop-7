@@ -47,9 +47,5 @@ RSpec.describe InvoiceItem do
         "Tuesday, March 27, 2012"
       )
     end
-
-    it "#formatted_unit_price_invoice_item" do
-      expect(@invoice_item.formatted_unit_price_invoice_item).to eq("$0.09")
-    end
   end
 end

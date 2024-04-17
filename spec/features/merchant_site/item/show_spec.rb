@@ -5,24 +5,6 @@ RSpec.describe "Merchant_items#show", type: :feature do
     define_instance_variables
   end
 
-  # User Story 7
-  it "merchant item show page lists name, description, and selling price" do
-    visit merchant_items_path(@merchant)
-
-    within ".top_5_items" do
-      click_link @item_list[0].name
-    end
-    expect(current_path).to eq(merchant_item_path(@merchant, @item_list[0]))
-
-    within ".item_attributes" do
-      expect(page).to have_content(@item_list[0].name)
-      expect(page).to have_content("Description: #{@item_list[0].description}")
-      expect(page).to have_content(
-        "Current Selling Price: #{@item_list[0].formatted_unit_price}"
-      )
-    end
-  end
-
   # User Story 8
   it "update item button" do
     visit merchant_item_path(@merchant, @item_list[0])

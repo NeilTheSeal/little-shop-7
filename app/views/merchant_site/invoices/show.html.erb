@@ -15,7 +15,7 @@
     <div id="invoice_item-<%= invoice_item.id %>">
       <li> <h3><%= invoice_item.item.name %></h3> </li>
       <p> Quantity: <%= invoice_item.quantity %></p>
-      <p> Price: <%= invoice_item.formatted_unit_price_invoice_item %></p>
+      <p> Price: $<%= number_with_precision(invoice_item.unit_price / 100, :precision => 2, :delimiter => ",") %></p>
       <p> Status: <%= invoice_item.status %></p>
 
       <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, data: {turbo: false}, local: true do |f| %>
@@ -29,5 +29,5 @@
 </section>
 
 <section class="total_revenue">
-  <p> Total Revenue: <%= @invoice.total_revenue %></p>
+  <p> Total Revenue: $<%= number_with_precision(@invoice.total_revenue / 100, :precision => 2, :delimiter => ",") %></p>
 </section>

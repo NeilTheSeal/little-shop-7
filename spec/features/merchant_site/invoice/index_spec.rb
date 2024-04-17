@@ -11,12 +11,12 @@ RSpec.describe "merchant_invoices#index", type: :feature do
 
     within ".merchant_invoices" do
       within "#invoice-#{@invoice_list[0].id}" do
-        expect(page).to have_link(@invoice_list[0].id)
+        expect(page).to have_link(@invoice_list[0].id.to_s)
       end
 
       within "#invoice-#{@invoice_list[1].id}" do
-        expect(page).to have_link(@invoice_list[1].id)
-        click_link(@invoice_list[1].id)
+        expect(page).to have_link(@invoice_list[1].id.to_s)
+        click_link(@invoice_list[1].id.to_s)
       end
 
       expect(current_path).to eq(
