@@ -1,7 +1,7 @@
 module AdminSite
   class InvoicesController < ApplicationController
     def index
-      @invoices = Invoice.all.order(:id)
+      @invoices = Invoice.all
     end
 
     def show
