@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices
   validates :name, :description, :unit_price, :status, presence: true
 
-  enum status: %w[enabled disabled]
+  enum :status, { enabled: 0, disabled: 1 }
 
   def self.enabled_items
     where(status: :enabled)

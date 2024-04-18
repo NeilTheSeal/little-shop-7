@@ -6,7 +6,7 @@ class Invoice < ApplicationRecord
   has_many :merchants, through: :items
   validates :status, presence: true
 
-  enum :status, ["cancelled", "in progress", "completed"]
+  enum :status, { cancelled: 0, "in progress": 1, completed: 2 }
 
   def self.unshipped_invoices
     joins(:invoice_items)

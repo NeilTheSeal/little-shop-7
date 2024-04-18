@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   validates :name, presence: true
 
-  enum :status, %w[enabled disabled]
+  enum :status, { enabled: 0, disabled: 1 }
 
   def top_five_customers
     transactions
