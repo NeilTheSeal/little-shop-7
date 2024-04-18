@@ -10,7 +10,7 @@ class Customer < ApplicationRecord
     self
       .select("customers.first_name, customers.last_name, customers.id, COUNT(customers.id) AS transaction_count")
       .joins(:transactions)
-      .where("transactions.result = 1")
+      .where("transactions.result = '1'")
       .group("customers.id")
       .order("COUNT(customers.id) DESC")
       .limit(5)
