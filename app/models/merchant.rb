@@ -27,7 +27,7 @@ class Merchant < ApplicationRecord
 
   def self.top_five_merchants
     Merchant.joins(:transactions)
-            .where("transactions.result = 1")
+            .where("transactions.result = '1'")
             .select("SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue, merchants.name AS merchant_name, merchants.id")
             .group("merchants.name, merchants.id")
             .order("total_revenue DESC")
